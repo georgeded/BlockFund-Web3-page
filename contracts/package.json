@@ -1,0 +1,17 @@
+{
+  "name": "blockfund-contracts",
+  "private": true,
+  "description": "BlockFund token + swap contracts, compile/test/deploy scripts",
+  "scripts": {
+    "compile": "node scripts/compile.js",
+    "test": "node scripts/compile.js && node scripts/test.js",
+    "deploy": "node scripts/compile.js && node scripts/deploy.js"
+  },
+  "dependencies": {
+    "ethers": "6.13.4",
+    "solc": "0.8.24"
+  },
+  "devDependencies": {
+    "ganache": "7.9.2"
+  }
+}
