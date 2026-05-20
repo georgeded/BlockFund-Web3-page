@@ -1,5 +1,14 @@
 {
+  "name": "blockfund",
+  "private": true,
+  "description": "BlockFund (BF): community token, swap and website on Base Sepolia",
   "scripts": {
-    "build": "cd BlockFund-main/backend && npm install"
+    "build": "npm --prefix server install",
+    "start": "npm --prefix server start",
+    "contracts:test": "npm --prefix contracts install && npm --prefix contracts test",
+    "contracts:deploy": "npm --prefix contracts run deploy"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
