@@ -217,3 +217,31 @@ body.logged-in .lock { display: none; }
 
 .mobile-nav { display: none; }
 
+/* Buttons */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 46px; padding: 0 22px; border-radius: 999px; border: 1px solid transparent;
+    background: var(--text); color: var(--bg); font: inherit; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; transition: transform 0.15s var(--ease), box-shadow 0.2s, background 0.2s, opacity 0.2s;
+    white-space: nowrap;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn:active { transform: none; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn svg { width: 18px; height: 18px; }
+.btn-accent { background: linear-gradient(100deg, var(--accent), var(--accent-2)); color: var(--on-accent); }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-ghost:hover { background: var(--bg-alt); }
+.btn-sm { height: 38px; padding: 0 16px; font-size: 0.875rem; }
+.btn-block { width: 100%; height: 54px; font-size: 1rem; border-radius: var(--radius); }
+
+/* Forms */
+label { display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; font-weight: 550; color: var(--text-2); }
+input[type='text'], input[type='email'], input[type='number'], select, textarea {
+    width: 100%; height: 46px; padding: 0 14px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong); background: var(--surface-2); color: var(--text);
+    font: inherit; font-size: 0.95rem; transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.form-error { color: var(--danger); font-size: 0.85rem; min-height: 1.2em; margin: 0; }
+
