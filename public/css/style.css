@@ -145,3 +145,75 @@ code, .mono { font-family: var(--mono); font-size: 0.92em; }
 }
 @keyframes drift { to { transform: translateX(-46%) translateY(4%) scale(1.06); } }
 
+/* Header */
+.site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--header-bg);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    border-bottom: 1px solid var(--border);
+}
+.header-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter);
+    height: 68px; display: flex; align-items: center; gap: 28px;
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-weight: 650; letter-spacing: -0.02em; font-size: 1.05rem; }
+.brand:hover { text-decoration: none; }
+.logo-mark {
+    width: 26px; height: 29px; flex: none;
+    background: linear-gradient(140deg, var(--accent), var(--accent-2) 60%, var(--accent-3));
+    -webkit-mask: url('/assets/logo.svg') center / contain no-repeat;
+    mask: url('/assets/logo.svg') center / contain no-repeat;
+}
+.main-nav { display: flex; align-items: center; gap: 4px; }
+.nav-item { position: relative; }
+.nav-link {
+    display: inline-flex; align-items: center; gap: 4px; padding: 8px 12px; border-radius: 999px;
+    color: var(--text-2); font-size: 0.94rem; font-weight: 500; transition: color 0.2s, background 0.2s;
+}
+.nav-link svg { width: 14px; height: 14px; opacity: 0.6; transition: transform 0.2s; }
+.nav-link:hover, .nav-item.active .nav-link { color: var(--text); background: var(--bg-alt); text-decoration: none; }
+.nav-item.active .nav-link { color: var(--accent-text); }
+.nav-item:hover .nav-link svg, .nav-item:focus-within .nav-link svg { transform: rotate(180deg); }
+.dropdown {
+    position: absolute; top: calc(100% + 8px); left: -8px; min-width: 260px; padding: 8px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: opacity 0.18s var(--ease), transform 0.18s var(--ease), visibility 0.18s;
+}
+.dropdown::before { content: ''; position: absolute; inset: -12px 0 auto; height: 12px; }
+.nav-item:hover .dropdown, .nav-item:focus-within .dropdown { opacity: 1; visibility: visible; transform: none; }
+.dropdown a { display: flex; flex-direction: column; padding: 10px 12px; border-radius: var(--radius-sm); color: var(--text); }
+.dropdown a:hover { background: var(--bg-alt); text-decoration: none; }
+.dropdown a span { font-weight: 550; font-size: 0.94rem; }
+.dropdown a small { color: var(--text-3); font-size: 0.82rem; }
+.lock { display: inline-grid; place-items: center; color: var(--accent-text); }
+.lock svg { width: 13px; height: 13px; opacity: 1; transform: none !important; }
+.nav-link .lock { margin-right: 2px; }
+.mobile-nav .lock { margin-right: 8px; vertical-align: -1px; }
+body.logged-in .lock { display: none; }
+
+.header-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.icon-btn {
+    display: inline-grid; place-items: center; width: 38px; height: 38px; padding: 0;
+    border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--text-2);
+    cursor: pointer; transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.icon-btn:hover { color: var(--text); border-color: var(--border-strong); background: var(--bg-alt); text-decoration: none; }
+.icon-btn svg { width: 18px; height: 18px; }
+:root[data-theme='dark'] .i-sun, :root:not([data-theme='dark']) .i-moon { display: none; }
+.menu-toggle { display: none; }
+
+.profile-chip {
+    display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 12px 0 4px;
+    border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+    color: var(--text); font: inherit; font-size: 0.875rem; cursor: pointer;
+}
+.profile-chip:hover { border-color: var(--border-strong); }
+.chip-balance { padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-text); font-weight: 600; font-family: var(--mono); font-size: 0.8rem; }
+.chip-avatar { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); flex: none; }
+.chip-avatar.lg { width: 48px; height: 48px; }
+
+.mobile-nav { display: none; }
+
