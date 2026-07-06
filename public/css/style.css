@@ -270,3 +270,43 @@ dialog.modal h2 { font-size: 1.7rem; }
 .profile-head { display: flex; align-items: center; gap: 16px; margin: 4px 0 20px; }
 .profile-head h2 { margin: 0; font-family: var(--mono); font-size: 1.4rem; }
 
+/* Cards */
+.card {
+    position: relative; padding: 28px; border-radius: var(--radius-lg);
+    background: var(--surface); border: 1px solid var(--border);
+    transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s;
+}
+a.card { display: block; color: inherit; }
+a.card:hover { text-decoration: none; transform: translateY(-3px); border-color: var(--border-strong); box-shadow: var(--shadow); }
+.card h3 { margin-top: 18px; }
+.card p:last-child { margin-bottom: 0; }
+.card .card-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-weight: 600; font-size: 0.9rem; color: var(--accent-text); }
+.card .card-link svg { width: 16px; height: 16px; transition: transform 0.2s; }
+a.card:hover .card-link svg { transform: translateX(3px); }
+.card-icon {
+    width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent-text);
+}
+.card-icon svg { width: 24px; height: 24px; }
+
+/* Line-art illustration panels */
+.art {
+    position: relative; aspect-ratio: 1; border-radius: var(--radius-lg);
+    border: 1px solid var(--border); background: var(--surface); overflow: hidden;
+    display: grid; place-items: center; color: var(--text);
+}
+.art::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(closest-side, var(--glow-1), transparent 70%), radial-gradient(closest-side at 70% 70%, var(--glow-2), transparent);
+}
+.art svg { position: relative; width: 78%; height: 78%; }
+.art .stroke { stroke: currentColor; opacity: 0.85; }
+.art .accent { stroke: var(--accent); }
+.art .accent-2 { stroke: var(--accent-2); }
+.art .accent-3 { stroke: var(--accent-3); }
+.art .fill-accent { fill: var(--accent); }
+.spin-slow { transform-origin: center; animation: spin 40s linear infinite; }
+.float { animation: float 6s var(--ease) infinite alternate; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes float { to { transform: translateY(-10px); } }
+
