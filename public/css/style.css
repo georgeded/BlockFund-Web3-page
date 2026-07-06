@@ -245,3 +245,28 @@ input[type='text'], input[type='email'], input[type='number'], select, textarea 
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .form-error { color: var(--danger); font-size: 0.85rem; min-height: 1.2em; margin: 0; }
 
+/* Modals (native <dialog>) */
+dialog.modal {
+    width: min(420px, calc(100vw - 32px)); padding: 32px; border-radius: var(--radius-lg);
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    box-shadow: var(--shadow-lg);
+}
+dialog.modal[open] { animation: pop 0.22s var(--ease); }
+dialog.modal::backdrop { background: rgba(5, 6, 10, 0.5); backdrop-filter: blur(6px); }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+dialog.modal h2 { font-size: 1.7rem; }
+.modal-close-form { position: absolute; top: 16px; right: 16px; margin: 0; }
+.wallet-options { display: grid; gap: 8px; margin-top: 8px; }
+.wallet-hint { margin: 0 0 2px; font-size: 0.85rem; font-weight: 550; color: var(--text-2); }
+.wallet-option {
+    display: flex; align-items: center; gap: 12px; width: 100%; height: 52px; padding: 0 16px;
+    border-radius: var(--radius); border: 1px solid var(--border-strong); background: var(--surface-2);
+    color: var(--text); font: inherit; font-weight: 600; cursor: pointer; text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+}
+.wallet-option:hover { border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+.wallet-option:disabled { opacity: 0.5; cursor: wait; }
+.wallet-option img, .wallet-option svg, .wallet-options .btn img { width: 26px; height: 26px; border-radius: 6px; flex: none; }
+.profile-head { display: flex; align-items: center; gap: 16px; margin: 4px 0 20px; }
+.profile-head h2 { margin: 0; font-family: var(--mono); font-size: 1.4rem; }
+
