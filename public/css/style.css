@@ -355,3 +355,29 @@ a.card:hover .card-link svg { transform: translateX(3px); }
 }
 .callout strong { color: var(--text); }
 
+/* Steps (Use guide) */
+.steps { list-style: none; padding: 0; margin: 0; counter-reset: step; display: grid; gap: 16px; }
+.step {
+    counter-increment: step; display: grid; grid-template-columns: 56px 1fr auto; gap: 20px; align-items: center;
+    padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface);
+}
+.step::before {
+    content: counter(step, decimal-leading-zero); font-family: var(--mono); font-size: 0.95rem; font-weight: 600;
+    width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent-text);
+}
+.step h3 { margin: 0 0 4px; }
+.step p { margin: 0; font-size: 0.95rem; }
+.step .step-action { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+
+.faucet-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+a.card.faucet, .faucet { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.faucet h3 { margin: 0 0 2px; }
+.faucet p { margin: 0; font-size: 0.875rem; }
+.faucet svg { width: 20px; height: 20px; flex: none; color: var(--text-3); transition: transform 0.2s, color 0.2s; }
+a.card.faucet:hover svg { transform: translateX(3px); color: var(--accent-text); }
+
+.kv { display: grid; grid-template-columns: auto 1fr auto; gap: 8px 16px; align-items: center; font-size: 0.9rem; }
+.kv dt { color: var(--text-3); }
+.kv dd { margin: 0; font-family: var(--mono); color: var(--text); word-break: break-all; }
+
