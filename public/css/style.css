@@ -325,3 +325,33 @@ a.card:hover .card-link svg { transform: translateX(3px); }
 .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 4px rgba(18, 163, 127, 0.18); }
 .pill a { color: var(--text); font-weight: 600; }
 
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); overflow: hidden; }
+.stat { padding: 32px; }
+.stat + .stat { border-left: 1px solid var(--border); }
+.stat .value { font-family: var(--mono); font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 600; letter-spacing: -0.03em; color: var(--text); line-height: 1.1; }
+.stat .unit { font-size: 0.5em; color: var(--text-3); margin-left: 4px; }
+.stat .label { margin: 10px 0 4px; font-weight: 600; color: var(--text); font-size: 0.95rem; }
+.stat p { margin: 0; font-size: 0.875rem; color: var(--text-3); }
+
+/* CTA band */
+.cta-band {
+    position: relative; overflow: hidden; isolation: isolate; text-align: center;
+    padding: clamp(48px, 8vw, 88px) var(--gutter); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); background: var(--surface);
+}
+.cta-band p { max-width: 520px; margin: 0 auto 28px; }
+
+/* Feature list / checks */
+.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.checks li { display: flex; gap: 12px; align-items: flex-start; color: var(--text-2); }
+.checks li::before {
+    content: ''; flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%;
+    background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237b61ff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+.callout {
+    padding: 18px 20px; border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--surface-2); font-size: 0.92rem; color: var(--text-2);
+}
+.callout strong { color: var(--text); }
+
