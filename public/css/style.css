@@ -381,3 +381,71 @@ a.card.faucet:hover svg { transform: translateX(3px); color: var(--accent-text);
 .kv dt { color: var(--text-3); }
 .kv dd { margin: 0; font-family: var(--mono); color: var(--text); word-break: break-all; }
 
+/* Swap app */
+.swap-layout { display: grid; grid-template-columns: minmax(0, 480px) minmax(0, 1fr); gap: 32px; align-items: start; }
+.swap-card { padding: 12px; border-radius: 28px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.swap-top { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px 14px; }
+.swap-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-alt); }
+.swap-tabs button { border: 0; background: transparent; color: var(--text-3); font: inherit; font-weight: 600; font-size: 0.875rem; padding: 6px 16px; border-radius: 999px; cursor: pointer; }
+.swap-tabs button[aria-selected='true'] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.wallet-select { width: auto; height: 30px; padding: 0 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; background: var(--surface-2); }
+.net-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-3); }
+.net-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
+.net-badge.ok::before { background: var(--success); }
+.net-badge.bad::before { background: var(--danger); }
+.swap-field { padding: 18px 18px 14px; border-radius: 20px; background: var(--surface-2); border: 1px solid transparent; transition: border-color 0.2s; }
+.swap-field:focus-within { border-color: var(--border-strong); }
+.swap-field .field-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-3); margin-bottom: 6px; }
+.swap-field .field-row { display: flex; align-items: center; gap: 12px; }
+.swap-field input {
+    flex: 1; min-width: 0; height: auto; padding: 0; border: 0; background: transparent; box-shadow: none;
+    font-family: var(--mono); font-size: 2rem; font-weight: 500; letter-spacing: -0.03em; color: var(--text);
+}
+.swap-field input:focus { box-shadow: none; }
+.swap-field input::placeholder { color: var(--text-3); opacity: 0.6; }
+.swap-field input::-webkit-outer-spin-button, .swap-field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.swap-field input[type='number'] { -moz-appearance: textfield; appearance: textfield; }
+.field-foot { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.82rem; color: var(--text-3); }
+.link-btn { border: 0; background: none; padding: 0; color: var(--accent-text); font: inherit; font-weight: 600; cursor: pointer; }
+.token-select { position: relative; flex: none; }
+.token-select select {
+    appearance: none; -webkit-appearance: none; width: auto; height: 40px; padding: 0 34px 0 40px;
+    border-radius: 999px; border: 1px solid var(--border); background-color: var(--surface);
+    font-weight: 600; cursor: pointer;
+}
+.token-badge {
+    display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px 0 6px;
+    border-radius: 999px; border: 1px solid var(--border); background: var(--surface); font-weight: 600;
+}
+.token-icon { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 0.62rem; font-weight: 700; color: #fff; flex: none; }
+.token-select .token-icon { position: absolute; left: 6px; top: 6px; pointer-events: none; }
+.token-select::after {
+    content: ''; position: absolute; right: 14px; top: 50%; width: 7px; height: 7px; margin-top: -5px;
+    border-right: 1.8px solid var(--text-3); border-bottom: 1.8px solid var(--text-3); transform: rotate(45deg); pointer-events: none;
+}
+.flip-wrap { display: flex; justify-content: center; height: 8px; position: relative; z-index: 1; }
+.flip {
+    position: absolute; top: -18px; width: 44px; height: 44px; border-radius: 14px;
+    border: 4px solid var(--surface); background: var(--surface-2); color: var(--text);
+    display: grid; place-items: center; cursor: pointer; transition: transform 0.3s var(--ease);
+}
+.flip:hover { transform: rotate(180deg); }
+.flip svg { width: 18px; height: 18px; }
+.swap-details { padding: 14px 12px 4px; font-size: 0.85rem; display: grid; gap: 6px; }
+.swap-details div { display: flex; justify-content: space-between; color: var(--text-3); }
+.swap-details span:last-child { color: var(--text-2); font-family: var(--mono); }
+.swap-card .btn-block { margin-top: 10px; }
+.swap-status { min-height: 1.4em; margin: 10px 4px 2px; font-size: 0.85rem; text-align: center; }
+.swap-status.error { color: var(--danger); }
+.swap-status.ok { color: var(--success); }
+.swap-status a { font-weight: 600; }
+.side-stack { display: grid; gap: 16px; }
+.faucet-card .countdown { font-family: var(--mono); font-size: 1.5rem; color: var(--text); margin: 4px 0 14px; }
+.notice {
+    display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; margin-bottom: 24px;
+    border-radius: var(--radius); border: 1px solid rgba(229, 72, 77, 0.35); background: rgba(229, 72, 77, 0.07);
+    font-size: 0.92rem; color: var(--text-2);
+}
+.notice strong { color: var(--text); }
+.notice code { padding: 1px 6px; border-radius: 6px; background: var(--bg-alt); }
+
