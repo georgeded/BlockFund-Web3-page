@@ -449,3 +449,76 @@ a.card.faucet:hover svg { transform: translateX(3px); color: var(--accent-text);
 .notice strong { color: var(--text); }
 .notice code { padding: 1px 6px; border-radius: 6px; background: var(--bg-alt); }
 
+/* Holder pages */
+.holders-gate { position: relative; }
+.gate-card {
+    position: absolute; z-index: 5; top: 48px; left: 50%; transform: translateX(-50%);
+    width: min(440px, calc(100% - 32px)); padding: 28px; text-align: center;
+    border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); box-shadow: var(--shadow-lg);
+}
+.gate-card .row { justify-content: center; }
+.gate-card h3 { margin: 12px 0 6px; }
+.gate-card p { font-size: 0.92rem; }
+.gate-icon { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--accent-soft); color: var(--accent-text); }
+.gate-icon svg { width: 22px; height: 22px; }
+body:not(.logged-in) .holders-gate > :not(.gate-card) {
+    filter: blur(7px); opacity: 0.55; pointer-events: none; user-select: none;
+    max-height: 760px; overflow: hidden;
+    -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent);
+}
+body.logged-in .gate-card { display: none; }
+
+.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.news-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+.news-card .thumb { aspect-ratio: 16 / 9; background: var(--surface-2); overflow: hidden; }
+.news-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
+a.news-card:hover .thumb img { transform: scale(1.04); }
+/* Logo tile when an article has no image */
+.news-card .thumb.no-image { display: grid; place-items: center; background: radial-gradient(closest-side, var(--glow-1), transparent), var(--surface-2); }
+.news-card .thumb.no-image::after {
+    content: ''; width: 56px; height: 63px;
+    background: linear-gradient(140deg, var(--accent), var(--accent-2) 60%, var(--accent-3));
+    -webkit-mask: url('/assets/logo.svg') center / contain no-repeat;
+    mask: url('/assets/logo.svg') center / contain no-repeat;
+}
+.news-card .body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+.news-card h3 { margin: 0 0 8px; font-size: 1.05rem; line-height: 1.35; }
+.news-card p { font-size: 0.9rem; flex: 1; }
+.news-card .meta { display: flex; justify-content: space-between; gap: 12px; font-size: 0.78rem; color: var(--text-3); font-family: var(--mono); }
+.pagination { display: flex; justify-content: center; gap: 6px; margin-top: 40px; flex-wrap: wrap; }
+.pagination button {
+    min-width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface);
+    color: var(--text-2); font: inherit; font-family: var(--mono); cursor: pointer;
+}
+.pagination button:disabled { background: var(--text); color: var(--bg); border-color: var(--text); cursor: default; }
+
+.chart-card { padding: 20px; }
+.chart-box { width: 100%; height: 420px; }
+.empty-state { display: grid; place-items: center; height: 100%; text-align: center; color: var(--text-3); font-size: 0.95rem; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+th, td { padding: 14px 20px; text-align: left; white-space: nowrap; }
+th { font-weight: 550; color: var(--text-3); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); }
+td { border-bottom: 1px solid var(--border); color: var(--text); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--mono); text-align: right; }
+th.num { text-align: right; }
+td .coin { display: flex; align-items: center; gap: 12px; }
+td .coin img { width: 28px; height: 28px; border-radius: 50%; }
+td .coin small { color: var(--text-3); margin-left: 4px; }
+.tv-widget { height: 520px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); }
+
+.chat-window { display: flex; flex-direction: column; height: min(70vh, 680px); padding: 0; overflow: hidden; }
+.chat-messages { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: min(560px, 80%); padding: 12px 16px; border-radius: 18px 18px 18px 6px; background: var(--surface-2); border: 1px solid var(--border); align-self: flex-start; }
+.msg.mine { align-self: flex-end; border-radius: 18px 18px 6px 18px; background: linear-gradient(120deg, var(--accent), var(--accent-2)); border-color: transparent; }
+.msg p { margin: 0; color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg.mine p, .msg.mine .msg-meta { color: #fff; }
+.msg-meta { display: flex; gap: 12px; justify-content: space-between; margin-top: 6px; font-size: 0.72rem; color: var(--text-3); font-family: var(--mono); }
+.msg-meta .coord { color: var(--accent-text); font-weight: 600; }
+.msg.mine .msg-meta .coord { color: #fff; }
+.chat-input { display: flex; gap: 10px; padding: 14px; border-top: 1px solid var(--border); background: var(--surface); }
+.chat-input input { flex: 1; border-radius: 999px; padding: 0 18px; }
+.chat-input .icon-btn { width: 46px; height: 46px; flex: none; }
+.coordinator-controls { display: flex; gap: 8px; }
+
