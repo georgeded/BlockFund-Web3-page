@@ -522,3 +522,22 @@ td .coin small { color: var(--text-3); margin-left: 4px; }
 .chat-input .icon-btn { width: 46px; height: 46px; flex: none; }
 .coordinator-controls { display: flex; gap: 8px; }
 
+/* Feedback form */
+.feedback-form { max-width: 760px; margin: 0 auto; display: grid; gap: 18px; }
+.feedback-form .grid-2 { gap: 18px; }
+textarea { height: auto; padding: 12px 14px; resize: vertical; min-height: 140px; line-height: 1.5; }
+.topic-picker { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.topic-picker legend { font-size: 0.85rem; font-weight: 550; color: var(--text-2); margin-bottom: 8px; padding: 0; }
+.topic-picker label { flex-direction: row; }
+.topic-picker input { position: absolute; opacity: 0; pointer-events: none; }
+.topic-picker span {
+    padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--text-2);
+    cursor: pointer; font-weight: 550; transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.topic-picker input:checked + span { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-text); }
+.topic-picker input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.feedback-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.feedback-actions .form-error { flex: 1; }
+.form-error.ok { color: var(--success); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
