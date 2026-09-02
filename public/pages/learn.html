@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learn | BlockFund</title>
+    <meta name="description" content="How BlockFund is built, what holders get, and how to get BF.">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/wallet.js" defer></script>
+    <script src="/js/site.js" defer></script>
+</head>
+<body>
+    <script src="/js/config.js"></script>
+    <script src="/js/layout.js"></script>
+
+    <main>
+        <header class="page-hero">
+            <div class="bg-glow"></div>
+            <div class="container">
+                <span class="eyebrow reveal">Learn</span>
+                <h1 class="reveal d1">How BlockFund works</h1>
+                <p class="reveal d2">A token, an exchange and a website, all small enough to read in an afternoon.</p>
+            </div>
+        </header>
+
+        <section class="section" id="technology">
+            <div class="container split">
+                <div class="reveal">
+                    <span class="eyebrow">Technology</span>
+                    <h2>The stack behind the site</h2>
+                    <p>BF is a fixed-supply ERC-20 deployed on <strong>Base Sepolia</strong>, the public testnet of Base, an Ethereum layer-2. We moved off Ethereum Sepolia after its faucets started requiring a mainnet balance and the network neared end-of-life.</p>
+                    <ul class="checks">
+                        <li><span><strong>BlockFund.sol</strong>: the BF token. One million tokens, minted once.</span></li>
+                        <li><span><strong>BlockFundSwap.sol</strong>: our fixed-rate exchange plus a daily BF faucet.</span></li>
+                        <li><span><strong>This website</strong>: plain HTML/CSS/JS on an Express backend, reading the chain directly over JSON-RPC.</span></li>
+                    </ul>
+                </div>
+                <div class="art reveal d1" aria-hidden="true">
+                    <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2" stroke-linecap="round">
+                        <g class="stroke" opacity=".45">
+                            <path d="M100 100L48 56M100 100L156 52M100 100L160 140M100 100L44 146M100 100L100 30M100 100L100 172M48 56L100 30L156 52M156 52L160 140M44 146L100 172L160 140M48 56L44 146"/>
+                        </g>
+                        <circle cx="100" cy="100" r="16" class="accent" stroke-width="1.8"/>
+                        <circle cx="100" cy="100" r="5" class="fill-accent" stroke="none"/>
+                        <g class="stroke"><circle cx="48" cy="56" r="7"/><circle cx="156" cy="52" r="7"/><circle cx="44" cy="146" r="7"/><circle cx="100" cy="172" r="7"/></g>
+                        <circle cx="160" cy="140" r="7" class="accent-3" stroke-width="1.6"/>
+                        <circle cx="100" cy="30" r="7" class="accent-2" stroke-width="1.6"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="benefits">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="eyebrow">Holder benefits</span>
+                    <h2>What holding BF unlocks</h2>
+                    <p>Log in with the wallet address that holds BF and a new <strong>Holders</strong> menu appears.</p>
+                </div>
+                <div class="grid-3">
+                    <a class="card reveal" href="/pages/news.html">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></div>
+                        <h3>Crypto news</h3>
+                        <p>A live feed of the latest headlines from across the crypto world.</p>
+                    </a>
+                    <a class="card reveal d1" href="/pages/graphs.html">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-7"/></svg></div>
+                        <h3>Live graphs</h3>
+                        <p>BF transfer activity alongside market data for the biggest coins.</p>
+                    </a>
+                    <a class="card reveal d2" href="/pages/chat.html">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div>
+                        <h3>Holder chat</h3>
+                        <p>Talk with other holders and the project coordinators in real time.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="get-bf">
+            <div class="container split">
+                <div class="art reveal" aria-hidden="true">
+                    <svg viewBox="0 0 200 200" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M50 40s16 17 16 29a16 16 0 0 1-32 0c0-12 16-29 16-29z" class="accent-2"/>
+                        <path d="M84 70h32M108 62l8 8-8 8" class="stroke" opacity=".6"/>
+                        <circle cx="150" cy="70" r="20" class="stroke"/>
+                        <path d="M143 64l7-7 7 7M157 76l-7 7-7-7" class="accent"/>
+                        <path d="M150 98v20M142 110l8 8 8-8" class="stroke" opacity=".6"/>
+                        <path d="M150 128l26 15v30l-26 15-26-15v-30z" class="accent-3"/>
+                        <path d="M124 143l26 15 26-15M150 158v30" class="accent-3" opacity=".7"/>
+                        <text x="50" y="112" text-anchor="middle" font-size="10" fill="currentColor" opacity=".6" style="font-family:var(--mono)">ETH</text>
+                        <text x="150" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity=".6" style="font-family:var(--mono)">SWAP</text>
+                        <text x="96" y="164" text-anchor="middle" font-size="10" fill="currentColor" opacity=".6" style="font-family:var(--mono)">BF</text>
+                    </svg>
+                </div>
+                <div class="reveal d1">
+                    <span class="eyebrow">How to get BF</span>
+                    <h2>Faucet, swap, done</h2>
+                    <p>Because BF lives on a testnet it has no real value, and neither does the ETH you pay with. The whole process is free:</p>
+                    <ul class="checks">
+                        <li><span>Claim free Base Sepolia ETH from a faucet.</span></li>
+                        <li><span>Swap it for BF on <a href="/pages/swap.html">BlockFund Swap</a>. WETH and test USDC work too.</span></li>
+                        <li><span>Or skip the swap: claim the free daily BF drip right from the swap page.</span></li>
+                    </ul>
+                    <div class="row gap" style="margin-top: 28px;">
+                        <a class="btn btn-accent" href="/pages/swap.html">Open swap</a>
+                        <a class="btn btn-ghost" href="/pages/use.html#guide">Step-by-step guide</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="callout reveal"><strong>Disclaimer:</strong> BlockFund is an educational project for experimenting with blockchain technology. BF has no monetary value and should never be bought with real funds.</div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
