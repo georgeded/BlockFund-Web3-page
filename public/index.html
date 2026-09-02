@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BlockFund</title>
+    <meta name="description" content="BlockFund (BF) is a community-built ERC-20 token on Base Sepolia, with its own swap and faucet.">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/wallet.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="/js/home.js" defer></script>
+</head>
+<body>
+    <script src="/js/config.js"></script>
+    <script src="/js/layout.js"></script>
+
+    <main>
+        <section class="hero">
+            <div class="bg-glow"></div>
+            <div class="container hero-inner">
+                <div>
+                    <div class="pill reveal"><span class="dot"></span>Live on Base Sepolia. <a href="/pages/swap.html">Claim free BF</a></div>
+                    <h1 class="reveal d1">The community token<br><span class="gradient-text">built in the open.</span></h1>
+                    <p class="lead reveal d2">BlockFund (BF) is a student-built ERC-20 on an Ethereum layer-2 testnet. Get free test ETH, swap it for BF, and unlock the holder-only corner of the site.</p>
+                    <div class="row gap reveal d2">
+                        <a class="btn btn-accent" href="/pages/swap.html">Get BF<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                        <a class="btn btn-ghost" href="/pages/learn.html">How it works</a>
+                    </div>
+                </div>
+                <div class="hero-art reveal d1" aria-hidden="true">
+                    <svg viewBox="0 0 400 400" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <defs>
+                            <linearGradient id="gTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-opacity=".35" style="stop-color:var(--accent)"/><stop offset="1" stop-opacity=".12" style="stop-color:var(--accent-2)"/></linearGradient>
+                            <linearGradient id="gL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-opacity=".18" style="stop-color:var(--accent)"/><stop offset="1" stop-opacity="0" style="stop-color:var(--accent)"/></linearGradient>
+                            <linearGradient id="gR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-opacity=".2" style="stop-color:var(--accent-3)"/><stop offset="1" stop-opacity="0" style="stop-color:var(--accent-2)"/></linearGradient>
+                            <linearGradient id="gEdge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--accent)"/><stop offset=".6" style="stop-color:var(--accent-2)"/><stop offset="1" style="stop-color:var(--accent-3)"/></linearGradient>
+                        </defs>
+                        <g class="spin-slow" stroke-width="1" style="stroke:var(--border-strong)">
+                            <circle cx="200" cy="200" r="182" stroke-dasharray="2 8"/>
+                            <circle cx="200" cy="18" r="4" stroke="none" style="fill:var(--accent)"/>
+                            <circle cx="382" cy="200" r="3" stroke="none" style="fill:var(--accent-3)"/>
+                            <circle cx="71" cy="329" r="3" stroke="none" style="fill:var(--accent-2)"/>
+                        </g>
+                        <circle cx="200" cy="200" r="140" stroke-width="1" style="stroke:var(--border)"/>
+                        <g class="float">
+                            <path d="M200 92 L290 144 L200 196 L110 144 Z" fill="url(#gTop)"/>
+                            <path d="M110 144 L200 196 L200 300 L110 248 Z" fill="url(#gL)"/>
+                            <path d="M200 196 L290 144 L290 248 L200 300 Z" fill="url(#gR)"/>
+                            <g stroke="url(#gEdge)" stroke-width="1.6">
+                                <path d="M200 92 L290 144 L290 248 L200 300 L110 248 L110 144 Z"/>
+                                <path d="M110 144 L200 196 L290 144 M200 196 V300"/>
+                            </g>
+                            <g stroke-width="1" opacity=".55" style="stroke:var(--text-3)">
+                                <path d="M155 118 L245 170 M245 118 L155 170"/>
+                                <path d="M155 170 V274 M245 170 V274"/>
+                            </g>
+                            <circle cx="200" cy="196" r="5" style="fill:var(--accent)"/>
+                        </g>
+                        <g stroke-width="1" opacity=".6" style="stroke:var(--text-3)">
+                            <path d="M110 144 L40 110 M290 144 L360 110 M200 300 V368"/>
+                        </g>
+                        <circle cx="40" cy="110" r="6" stroke-width="1.6" style="stroke:var(--accent-2)"/>
+                        <circle cx="360" cy="110" r="6" stroke-width="1.6" style="stroke:var(--accent-3)"/>
+                        <circle cx="200" cy="368" r="6" stroke-width="1.6" style="stroke:var(--accent)"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="eyebrow">Get started</span>
+                    <h2>From zero to holder in three moves</h2>
+                    <p>Everything runs on testnet, so it costs nothing. Here's the route we recommend.</p>
+                </div>
+                <div class="grid-3">
+                    <a class="card reveal" href="/pages/use.html#faucets">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11z"/><path d="M9 14.5a3 3 0 0 0 3 3"/></svg></div>
+                        <h3>Grab free test ETH</h3>
+                        <p>Claim Base Sepolia ETH from a faucet. No mainnet balance required.</p>
+                        <span class="card-link">Faucets<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </a>
+                    <a class="card reveal d1" href="/pages/swap.html">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4L3 8l4 4"/><path d="M3 8h14"/><path d="M17 20l4-4-4-4"/><path d="M21 16H7"/></svg></div>
+                        <h3>Swap for BF</h3>
+                        <p>Trade ETH, WETH or test USDC for BF in our own swap, or claim the daily BF drip.</p>
+                        <span class="card-link">Open swap<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </a>
+                    <a class="card reveal d2" href="/pages/learn.html#benefits">
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.5"/></svg></div>
+                        <h3>Unlock holder perks</h3>
+                        <p>Log in with your wallet address for live news, market graphs and the holder chat.</p>
+                        <span class="card-link">Benefits<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="split">
+                    <div class="reveal">
+                        <span class="eyebrow">What is BlockFund</span>
+                        <h2>A portfolio project you can actually hold</h2>
+                        <p>BlockFund was created by a group of computer-science students to learn blockchain end to end: the token contract, the exchange, and the website around them.</p>
+                        <p>It lives on Base Sepolia, a public testnet of Coinbase's Ethereum layer-2. Test tokens have no monetary value, so anyone can experiment freely.</p>
+                        <a class="btn btn-ghost" href="/pages/learn.html#technology">Read about the tech</a>
+                    </div>
+                    <div class="art reveal d1" aria-hidden="true">
+                        <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                            <g class="stroke">
+                                <rect x="30" y="80" width="40" height="40" rx="6"/>
+                                <rect x="80" y="80" width="40" height="40" rx="6"/>
+                                <rect x="130" y="80" width="40" height="40" rx="6"/>
+                                <path d="M70 100h10M120 100h10"/>
+                            </g>
+                            <rect x="130" y="80" width="40" height="40" rx="6" class="accent" stroke-width="1.8"/>
+                            <g class="stroke" opacity=".5"><path d="M40 92h20M40 100h14M40 108h18M90 92h20M90 100h12M90 108h18"/></g>
+                            <g class="accent"><path d="M140 92h20M140 100h12M140 108h18"/></g>
+                            <path d="M150 120v26" class="accent-3" stroke-dasharray="2 4"/>
+                            <circle cx="150" cy="154" r="8" class="accent-3"/>
+                            <path d="M146 154h8M150 150v8" class="accent-3"/>
+                            <path d="M50 80V54" class="accent-2" stroke-dasharray="2 4"/>
+                            <circle cx="50" cy="46" r="8" class="accent-2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="eyebrow">On-chain</span>
+                    <h2>BF by the numbers</h2>
+                </div>
+                <div class="stats reveal">
+                    <div class="stat">
+                        <div class="value">1,000,000<span class="unit">BF</span></div>
+                        <div class="label">Total supply</div>
+                        <p>Fixed at deployment. No minting after launch.</p>
+                    </div>
+                    <div class="stat">
+                        <div class="value" id="statTransfers">...</div>
+                        <div class="label">Transfers</div>
+                        <p>BF transfers recorded on Base Sepolia.</p>
+                    </div>
+                    <div class="stat">
+                        <div class="value"><span id="statReserve">...</span><span class="unit">BF</span></div>
+                        <div class="label">Swap liquidity</div>
+                        <p>BF held by the swap, ready to trade or drip.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="cta-band reveal">
+                    <div class="bg-glow"></div>
+                    <span class="eyebrow">Community</span>
+                    <h2>Join the BlockFund community</h2>
+                    <p>Become a holder, log in, and help shape what we build next.</p>
+                    <a class="btn btn-accent" href="/pages/participate.html">How to join</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
