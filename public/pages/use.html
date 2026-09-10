@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Use | BlockFund</title>
+    <meta name="description" content="Set up a wallet, get free Base Sepolia ETH and swap it for BF.">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/wallet.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="/js/use.js" defer></script>
+</head>
+<body>
+    <script src="/js/config.js"></script>
+    <script src="/js/layout.js"></script>
+
+    <main>
+        <header class="page-hero">
+            <div class="bg-glow"></div>
+            <div class="container">
+                <span class="eyebrow reveal">Use</span>
+                <h1 class="reveal d1">Wallet to BF in five steps</h1>
+                <p class="reveal d2">Most steps are a single click. Have a browser wallet like MetaMask, Rabby or Coinbase Wallet ready.</p>
+            </div>
+        </header>
+
+        <section class="section" id="guide">
+            <div class="container">
+                <ol class="steps">
+                    <li class="step reveal">
+                        <div>
+                            <h3>Install a wallet</h3>
+                            <p>Any EVM browser wallet works. Write down your recovery phrase and never share it. We will never ask for it.</p>
+                        </div>
+                        <div class="step-action"><a class="btn btn-ghost btn-sm" href="https://metamask.io/download/" target="_blank" rel="noopener">Get MetaMask</a></div>
+                    </li>
+                    <li class="step reveal">
+                        <div>
+                            <h3>Add Base Sepolia</h3>
+                            <p>Adds the network (chain ID <span class="mono">84532</span>) to your wallet and switches to it.</p>
+                        </div>
+                        <div class="step-action"><button class="btn btn-sm" id="addNetwork">Add network</button></div>
+                    </li>
+                    <li class="step reveal">
+                        <div>
+                            <h3>Claim free test ETH</h3>
+                            <p>Paste your address into one of the faucets below. A few cents' worth of test ETH covers dozens of transactions.</p>
+                        </div>
+                        <div class="step-action"><a class="btn btn-ghost btn-sm" href="#faucets">See faucets</a></div>
+                    </li>
+                    <li class="step reveal">
+                        <div>
+                            <h3>Swap for BF</h3>
+                            <p>Connect on the swap page, enter an amount and confirm. Or claim the free daily BF drip.</p>
+                        </div>
+                        <div class="step-action"><a class="btn btn-accent btn-sm" href="/pages/swap.html">Open swap</a></div>
+                    </li>
+                    <li class="step reveal">
+                        <div>
+                            <h3>Show BF in your wallet</h3>
+                            <p>Wallets hide unknown tokens until you import them. One click adds BF to your asset list.</p>
+                        </div>
+                        <div class="step-action">
+                            <button class="btn btn-sm" id="addToken">Add BF to wallet</button>
+                            <button class="btn btn-ghost btn-sm" id="copyToken">Copy address</button>
+                        </div>
+                    </li>
+                </ol>
+                <p class="form-error center" id="useStatus" role="status" style="margin-top: 16px;"></p>
+            </div>
+        </section>
+
+        <section class="section" id="faucets">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="eyebrow">Faucets</span>
+                    <h2>Free Base Sepolia ETH</h2>
+                    <p>Ethereum Sepolia faucets now require a mainnet balance. These Base Sepolia faucets don't. Limits change often, so try another if one is dry.</p>
+                </div>
+                <div class="faucet-list" id="faucetList"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="eyebrow">Reference</span>
+                    <h2>Network details</h2>
+                    <p>If your wallet asks you to add the network by hand, use these values.</p>
+                </div>
+                <div class="card reveal">
+                    <dl class="kv" id="networkDetails"></dl>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
