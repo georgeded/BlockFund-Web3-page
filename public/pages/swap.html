@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Swap | BlockFund</title>
+    <meta name="description" content="Swap ETH, WETH or test USDC for BlockFund (BF) on Base Sepolia, or claim the free daily BF drip.">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js" defer></script>
+    <script src="/js/wallet.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="/js/swap.js" defer></script>
+</head>
+<body>
+    <script src="/js/config.js"></script>
+    <script src="/js/layout.js"></script>
+
+    <main>
+        <header class="page-hero" style="padding-bottom: 40px;">
+            <div class="bg-glow"></div>
+            <div class="container">
+                <span class="eyebrow reveal">BlockFund Swap</span>
+                <h1 class="reveal d1">Swap into BF</h1>
+                <p class="reveal d2">Our own exchange contract. Pay with ETH, WETH or test USDC at a fixed rate, sell BF back any time, or claim free BF once a day.</p>
+            </div>
+        </header>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="notice" id="notDeployed" hidden>
+                    <div><strong>The swap contract isn't deployed yet.</strong> Run <code>npm run deploy</code> in <code>contracts/</code> with a funded Base Sepolia key, then paste the two printed addresses into <code>public/js/config.js</code>. Until then, this page is a preview.</div>
+                </div>
+
+                <div class="swap-layout">
+                    <div class="swap-card">
+                        <div class="swap-top">
+                            <div class="swap-tabs" role="tablist">
+                                <button role="tab" aria-selected="true" data-mode="buy">Buy BF</button>
+                                <button role="tab" aria-selected="false" data-mode="sell">Sell BF</button>
+                            </div>
+                            <div class="row gap-sm">
+                                <select class="wallet-select" id="walletSelect" aria-label="Wallet" hidden></select>
+                                <span class="net-badge" id="netBadge">Not connected</span>
+                            </div>
+                        </div>
+
+                        <div class="swap-field">
+                            <div class="field-label"><span>You pay</span><span id="payBalance"></span></div>
+                            <div class="field-row">
+                                <input type="number" id="payAmount" placeholder="0" min="0" step="any" inputmode="decimal" autocomplete="off" aria-label="Amount to pay">
+                                <div id="paySlot"></div>
+                            </div>
+                            <div class="field-foot"><span id="payHint"></span><button class="link-btn" id="maxBtn" hidden>Max</button></div>
+                        </div>
+
+                        <div class="flip-wrap">
+                            <button class="flip" id="flipBtn" aria-label="Switch buy and sell">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+                            </button>
+                        </div>
+
+                        <div class="swap-field">
+                            <div class="field-label"><span>You receive</span><span id="receiveBalance"></span></div>
+                            <div class="field-row">
+                                <input type="text" id="receiveAmount" placeholder="0" readonly tabindex="-1" aria-label="Amount to receive">
+                                <div id="receiveSlot"></div>
+                            </div>
+                        </div>
+
+                        <div class="swap-details">
+                            <div><span>Rate</span><span id="rateText">-</span></div>
+                            <div><span>Minimum received</span><span id="minText">-</span></div>
+                            <div><span>Liquidity available</span><span id="reserveText">-</span></div>
+                        </div>
+
+                        <button class="btn btn-accent btn-block" id="actionBtn">Connect wallet</button>
+                        <p class="swap-status" id="swapStatus" role="status"></p>
+                    </div>
+
+                    <div class="side-stack">
+                        <div class="card faucet-card">
+                            <span class="eyebrow">Daily drip</span>
+                            <h3 style="margin-top: 0;">Free BF, every <span id="faucetCooldown">24h</span></h3>
+                            <p>No ETH to spare? Claim <strong id="faucetAmount">25 BF</strong> straight from the swap's reserve. You only pay a tiny test-ETH gas fee.</p>
+                            <div class="countdown" id="faucetCountdown">Ready</div>
+                            <button class="btn" id="claimBtn">Claim BF</button>
+                        </div>
+                        <div class="card">
+                            <span class="eyebrow">Need gas?</span>
+                            <h3 style="margin-top: 0;">Free test ETH</h3>
+                            <p>Every transaction needs a little Base Sepolia ETH. Faucets hand it out for free.</p>
+                            <div class="row gap-sm">
+                                <a class="btn btn-ghost btn-sm" href="/pages/use.html#faucets">Faucets</a>
+                                <button class="btn btn-ghost btn-sm" id="addTokenSide">Add BF to wallet</button>
+                            </div>
+                            <p class="form-error small" id="addTokenStatus" role="status" style="margin-top: 10px;"></p>
+                        </div>
+                        <div class="callout small">
+                            <strong>How pricing works:</strong> BF trades at fixed rates set by the project, not a bonding curve, so the price never moves while your transaction is pending. Sell orders are paid from what the contract holds.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
