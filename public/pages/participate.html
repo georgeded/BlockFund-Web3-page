@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Participate | BlockFund</title>
+    <meta name="description" content="Join the BlockFund community, read the documentation and send us feedback.">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/wallet.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="/js/feedback.js" defer></script>
+</head>
+<body>
+    <script src="/js/config.js"></script>
+    <script src="/js/layout.js"></script>
+
+    <main>
+        <header class="page-hero">
+            <div class="bg-glow"></div>
+            <div class="container">
+                <span class="eyebrow reveal">Participate</span>
+                <h1 class="reveal d1">Build BlockFund with us</h1>
+                <p class="reveal d2">Hold BF, read how it works, and tell us what to build next.</p>
+            </div>
+        </header>
+
+        <section class="section" id="join">
+            <div class="container split">
+                <div class="reveal">
+                    <span class="eyebrow">Join the community</span>
+                    <h2>Why join?</h2>
+                    <p>We want to make finance more open and transparent, and we learn best by building with others.</p>
+                    <ul class="checks">
+                        <li><span>Meet other crypto and blockchain enthusiasts</span></li>
+                        <li><span>Early access to new features and contract upgrades</span></li>
+                        <li><span>Holder-only news, live graphs and group chat</span></li>
+                        <li><span>Your feedback directly shapes the roadmap</span></li>
+                    </ul>
+                    <h3 style="margin-top: 36px;">How to join</h3>
+                    <p>Hold any amount of BF, then log in with your wallet from the top bar.</p>
+                    <div class="row gap">
+                        <a class="btn btn-accent" href="/pages/swap.html">Get BF</a>
+                        <button class="btn btn-ghost" data-open-login>Log in</button>
+                    </div>
+                </div>
+                <div class="art reveal d1" aria-hidden="true">
+                    <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2" stroke-linecap="round">
+                        <circle cx="100" cy="100" r="78" class="stroke" opacity=".25" stroke-dasharray="2 5"/>
+                        <circle cx="100" cy="100" r="50" class="stroke" opacity=".4"/>
+                        <g class="spin-slow">
+                            <circle cx="100" cy="22" r="9" class="accent-2" stroke-width="1.6"/>
+                            <circle cx="178" cy="100" r="9" class="accent-3" stroke-width="1.6"/>
+                            <circle cx="100" cy="178" r="9" class="stroke"/>
+                            <circle cx="22" cy="100" r="9" class="stroke"/>
+                            <circle cx="155" cy="45" r="6" class="stroke" opacity=".6"/>
+                            <circle cx="45" cy="155" r="6" class="accent" opacity=".8"/>
+                        </g>
+                        <g class="stroke"><circle cx="100" cy="50" r="7"/><circle cx="143" cy="125" r="7"/><circle cx="57" cy="125" r="7"/></g>
+                        <path d="M100 57v25M137 121l-22-12M63 121l22-12" class="stroke" opacity=".5"/>
+                        <path d="M100 82l17 10v20l-17 10-17-10V92z" class="accent" stroke-width="1.8"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="docs">
+            <div class="container split">
+                <div class="reveal">
+                    <span class="eyebrow">Documentation</span>
+                    <h2>Read the full write-up</h2>
+                    <p>Covers the motivation, architecture, smart contracts, a step-by-step user guide and how to run the project. Read it online or download the PDF.</p>
+                    <div class="row gap">
+                        <a class="btn" href="/docs/blockfund-documentation.html" target="_blank" rel="noopener">Read online</a>
+                        <a class="btn btn-ghost" href="/docs/blockfund-documentation.pdf" download="BlockFund-documentation.pdf">Download PDF</a>
+                        <a class="btn btn-ghost" href="https://github.com/georgeded/BlockFund-Web3-page" target="_blank" rel="noopener">View source</a>
+                    </div>
+                </div>
+                <div class="art reveal d1" aria-hidden="true">
+                    <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M62 34h56l26 26v106a6 6 0 0 1-6 6H62a6 6 0 0 1-6-6V40a6 6 0 0 1 6-6z" class="stroke"/>
+                        <path d="M118 34v26h26" class="stroke"/>
+                        <path d="M72 82h50M72 96h56M72 110h40" class="stroke" opacity=".5"/>
+                        <path d="M72 128h20l8-10 10 18 8-8h10" class="accent" stroke-width="1.6"/>
+                        <path d="M72 150h30" class="accent-3" stroke-width="1.6"/>
+                        <rect x="132" y="128" width="40" height="40" rx="10" class="accent-2" transform="rotate(12 152 148)"/>
+                        <path d="M144 146l6 6 10-10" class="accent-2" stroke-width="1.6" transform="rotate(12 152 148)"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="feedback">
+            <div class="container">
+                <div class="section-head center reveal">
+                    <span class="eyebrow">Feedback</span>
+                    <h2>Tell us what you think</h2>
+                    <p>Bugs, ideas, or just a hello. Your message goes straight to the team.</p>
+                </div>
+                <form class="card feedback-form reveal" id="feedbackForm" novalidate>
+                    <fieldset class="topic-picker">
+                        <legend>What is it about?</legend>
+                        <label><input type="radio" name="topic" value="Idea" checked><span>Idea</span></label>
+                        <label><input type="radio" name="topic" value="Bug"><span>Bug</span></label>
+                        <label><input type="radio" name="topic" value="Question"><span>Question</span></label>
+                        <label><input type="radio" name="topic" value="Other"><span>Other</span></label>
+                    </fieldset>
+                    <div class="grid-2">
+                        <label><span>Name <span class="muted">(optional)</span></span><input type="text" name="name" maxlength="80" autocomplete="name"></label>
+                        <label><span>Email <span class="muted">(optional, for a reply)</span></span><input type="email" name="email" maxlength="120" autocomplete="email" inputmode="email"></label>
+                    </div>
+                    <label>Message<textarea name="message" rows="6" maxlength="4000" required placeholder="What should we know?"></textarea></label>
+                    <label class="hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                    <div class="feedback-actions">
+                        <p class="form-error" id="feedbackStatus" role="status"></p>
+                        <button type="submit" class="btn btn-accent">Send feedback</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
