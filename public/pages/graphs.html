@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graphs | BlockFund</title>
+    <meta name="description" content="BF activity and live crypto market data for BlockFund holders.">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/wallet.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js" defer></script>
+    <script src="/js/graphs.js" defer></script>
+</head>
+<body>
+    <script src="/js/config.js"></script>
+    <script src="/js/layout.js"></script>
+
+    <main>
+        <header class="page-hero" style="padding-bottom: 40px;">
+            <div class="bg-glow"></div>
+            <div class="container">
+                <span class="eyebrow reveal">Holders</span>
+                <h1 class="reveal d1">Markets &amp; BF activity</h1>
+                <p class="reveal d2">BF transfers on Base Sepolia next to live data for the biggest coins.</p>
+            </div>
+        </header>
+
+        <div class="holders-gate">
+            <section class="section" style="padding-top: 0;">
+                <div class="container">
+                    <div class="section-head">
+                        <h2>BlockFund activity</h2>
+                        <p>Cumulative BF transfers per day.</p>
+                    </div>
+                    <div class="card chart-card"><div class="chart-box" id="tvchart"></div></div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-head">
+                        <h2>Top 10 by 24h volume</h2>
+                        <p>Live prices for the most traded cryptocurrencies.</p>
+                    </div>
+                    <div class="table-wrap">
+                        <table id="crypto-table">
+                            <thead><tr><th>#</th><th>Coin</th><th class="num">Price (USD)</th><th class="num">24h volume (USD)</th></tr></thead>
+                            <tbody><tr><td colspan="4" class="muted">Loading...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-head">
+                        <h2>Price charts</h2>
+                        <p>Pick a coin in the widget to see its full history.</p>
+                    </div>
+                    <div class="tv-widget" id="tradingview-widget"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
