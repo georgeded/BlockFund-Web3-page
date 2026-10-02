@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chat | BlockFund</title>
+    <meta name="description" content="The BlockFund holder group chat.">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/wallet.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="/js/chat.js" defer></script>
+</head>
+<body>
+    <script src="/js/config.js"></script>
+    <script src="/js/layout.js"></script>
+
+    <main>
+        <header class="page-hero" style="padding-bottom: 40px;">
+            <div class="bg-glow"></div>
+            <div class="container">
+                <span class="eyebrow reveal">Holders</span>
+                <h1 class="reveal d1">Group chat</h1>
+                <p class="reveal d2">Talk with other holders and the project coordinators.</p>
+            </div>
+        </header>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="container holders-gate">
+                <div class="card chat-window">
+                    <div class="chat-messages" id="textwindow"></div>
+                    <form class="chat-input" id="chatForm">
+                        <div class="coordinator-controls" id="coordinator-controls" hidden>
+                            <button type="button" class="icon-btn" id="delete-messages" title="Delete all messages" aria-label="Delete all messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button>
+                            <button type="button" class="icon-btn" id="reset-messages" title="Restore deleted messages" aria-label="Restore deleted messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
+                        </div>
+                        <input type="text" id="chatinput" placeholder="Write a message..." autocomplete="off" maxlength="500">
+                        <button type="submit" class="icon-btn" id="send" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
