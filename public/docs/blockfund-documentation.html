@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BlockFund Documentation</title>
+    <meta name="description" content="Full documentation of the BlockFund project: token, swap, website, architecture and user guide.">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Source of blockfund-documentation.pdf. Print to PDF (A4, backgrounds on) after editing. -->
+    <style>
+        :root {
+            --text: #0e0f14; --text-2: #3f4250; --text-3: #7c7f8c; --border: #e4e4ec; --soft: #f5f4fb;
+            --accent: #6b4dff; --accent-2: #2f8cff; --accent-3: #18c4a6;
+        }
+        @page { size: A4; margin: 22mm 20mm 20mm; }
+        @page :first { margin: 0; }
+        * { box-sizing: border-box; }
+        html { background: #e9e9ef; }
+        body {
+            margin: 0 auto; max-width: 820px; background: #fff; color: var(--text);
+            font: 10.5pt/1.62 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+        }
+        main { padding: 0 64px 64px; }
+        h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
+        h2 { font-size: 19pt; margin: 0 0 12px; padding-top: 8px; break-after: avoid; }
+        h2 .num { font-family: 'JetBrains Mono', monospace; font-size: 11pt; color: var(--accent); margin-right: 10px; vertical-align: 3px; }
+        h3 { font-size: 12pt; margin: 22px 0 6px; break-after: avoid; }
+        p, li { color: var(--text-2); }
+        p { margin: 0 0 10px; }
+        ul, ol { padding-left: 20px; margin: 0 0 12px; }
+        li { margin-bottom: 4px; }
+        strong { color: var(--text); }
+        a { color: var(--accent); text-decoration: none; }
+        code { font-family: 'JetBrains Mono', monospace; font-size: 8.8pt; background: var(--soft); padding: 1px 5px; border-radius: 4px; color: var(--text); }
+        pre { font-family: 'JetBrains Mono', monospace; font-size: 8.6pt; line-height: 1.55; background: var(--soft); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin: 0 0 14px; white-space: pre-wrap; break-inside: avoid; }
+        table { width: 100%; border-collapse: collapse; margin: 6px 0 16px; font-size: 9.6pt; break-inside: avoid; }
+        th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        th { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 600; }
+        td:first-child { color: var(--text); font-weight: 550; white-space: nowrap; }
+        td { color: var(--text-2); }
+        section { padding-top: 34px; }
+        .note { border-left: 3px solid var(--accent); background: var(--soft); padding: 10px 14px; border-radius: 0 10px 10px 0; margin: 4px 0 14px; font-size: 9.8pt; break-inside: avoid; }
+        .note p:last-child { margin: 0; }
+
+        /* Cover */
+        .cover {
+            position: relative; min-height: 297mm; padding: 64px; display: flex; flex-direction: column; overflow: hidden;
+            background: #08090d; color: #f2f3f7; break-after: page;
+        }
+        .cover::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+                radial-gradient(closest-side at 30% 30%, rgba(139,116,255,.35), transparent),
+                radial-gradient(closest-side at 75% 35%, rgba(78,161,255,.22), transparent),
+                radial-gradient(closest-side at 55% 75%, rgba(46,224,191,.16), transparent);
+        }
+        .cover::after {
+            content: ''; position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+        .cover > * { position: relative; z-index: 1; }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 650; font-size: 14pt; }
+        .brand img { width: 34px; height: 38px; }
+        .cover .eyebrow { margin-top: auto; font-family: 'JetBrains Mono', monospace; font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; color: #a897ff; }
+        .cover h1 { font-size: 46pt; letter-spacing: -0.04em; margin: 10px 0 14px; color: #fff; }
+        .cover h1 span { background: linear-gradient(100deg, #8b74ff, #4ea1ff 55%, #2ee0bf); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .cover .lead { font-size: 13pt; color: #b3b6c3; max-width: 520px; }
+        .cover-meta { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 22px; font-size: 9.4pt; }
+        .cover-meta div { color: #b3b6c3; }
+        .cover-meta b { display: block; color: #fff; font-weight: 600; margin-bottom: 4px; font-size: 8pt; text-transform: uppercase; letter-spacing: .1em; }
+        .cover-meta a { color: #a897ff; }
+        .disclaimer { margin-top: 28px; font-size: 8.6pt; color: #7e8191; max-width: 600px; }
+
+        .toc { list-style: none; padding: 0; counter-reset: toc; }
+        .toc li { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); counter-increment: toc; }
+        .toc li::before { content: counter(toc, decimal-leading-zero); font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 9pt; padding-top: 2px; }
+        .toc a { color: var(--text); font-weight: 550; }
+        .toc span { color: var(--text-3); margin-left: auto; font-size: 9pt; }
+
+        .steps { counter-reset: s; list-style: none; padding: 0; }
+        .steps li { counter-increment: s; position: relative; padding: 2px 0 8px 40px; break-inside: avoid; }
+        .steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 8px; background: var(--soft); color: var(--accent); font: 600 9pt 'JetBrains Mono', monospace; display: grid; place-items: center; }
+
+        .doc-footer { margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 8.6pt; color: var(--text-3); display: flex; justify-content: space-between; }
+
+        @media screen {
+            body { margin: 32px auto; box-shadow: 0 20px 60px rgba(0,0,0,.12); border-radius: 16px; }
+            .cover { border-radius: 16px 16px 0 0; }
+            .cover { min-height: 0; padding: 64px 64px 56px; }
+            .cover .eyebrow { margin-top: 120px; }
+            .download { position: fixed; right: 20px; bottom: 20px; z-index: 5; background: #0e0f14; color: #fff; padding: 12px 18px; border-radius: 999px; font-weight: 600; font-size: 10pt; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+        }
+        @media print { html { background: #fff; } .download { display: none; } body { max-width: none; } main { padding: 0; } .cover h1 span { background: none; color: #a897ff; } }
+        @media (max-width: 640px) {
+            main { padding: 0 20px 40px; }
+            .cover { padding: 40px 20px; }
+            .cover h1 { font-size: 32pt; }
+            .cover-meta { grid-template-columns: 1fr; }
+            table { display: block; overflow-x: auto; }
+            body { margin: 0; border-radius: 0; }
+        }
+    </style>
+</head>
+<body>
+    <a class="download" href="/docs/blockfund-documentation.pdf" download="BlockFund-documentation.pdf">Download PDF</a>
+
+    <div class="cover">
+        <div class="brand"><img src="/assets/logo.svg" alt="" style="filter: invert(1);"><span>BlockFund</span></div>
+        <div class="eyebrow">Project documentation, version 2, October 2026</div>
+        <h1>BlockFund<br><span>community token</span></h1>
+        <p class="lead">A student-led experiment in blockchain technology: an ERC-20 token, our own exchange and faucet contract, and the website that ties them together.</p>
+        <div class="cover-meta">
+            <div><b>Coordinator</b>George Dedempilis<br><a href="https://github.com/georgeded">github.com/georgeded</a><br><a href="https://www.linkedin.com/in/george-dedempilis/">LinkedIn</a></div>
+            <div><b>Coordinator</b>Dean Kok<br><a href="https://github.com/deank055">github.com/deank055</a><br><a href="https://www.linkedin.com/in/dean-kok/">LinkedIn</a></div>
+            <div><b>Project</b>Amsterdam, Netherlands<br><a href="https://blockfund.onrender.com">blockfund.onrender.com</a><br><a href="https://github.com/georgeded/BlockFund-Web3-page">Source code</a></div>
+        </div>
+        <p class="disclaimer">BlockFund is built purely for education and experimentation. It runs on the Base Sepolia testnet, so every token and transaction is simulated and has no monetary value. It is not an investment product and must never be bought with real funds.</p>
+    </div>
+
+    <main>
+        <section>
+            <h2>Contents</h2>
+            <ol class="toc">
+                <li><a href="#abstract">Abstract</a><span>Main idea</span></li>
+                <li><a href="#description">Project description</a><span>What BlockFund is</span></li>
+                <li><a href="#architecture">Architecture</a><span>Stack and file structure</span></li>
+                <li><a href="#contracts">Smart contracts</a><span>Token, swap, faucet</span></li>
+                <li><a href="#features">Features</a><span>What the website offers</span></li>
+                <li><a href="#guide">User guide</a><span>From wallet to holder</span></li>
+                <li><a href="#developers">Running and deploying</a><span>For developers</span></li>
+                <li><a href="#reference">Reference</a><span>Network, rates, API</span></li>
+                <li><a href="#challenges">Challenges and solutions</a><span>What we learned</span></li>
+                <li><a href="#resources">Resources and references</a><span>Credits</span></li>
+            </ol>
+        </section>
+
+        <section id="abstract">
+            <h2><span class="num">01</span>Abstract</h2>
+            <p>BlockFund is a student-led educational project that gives hands-on experience with blockchain technology and decentralized finance (DeFi) in a risk-free setting. Everything runs on <strong>Base Sepolia</strong>, the public testnet of Base, an Ethereum layer-2 network, so users can experiment without any financial risk.</p>
+            <p>The project has three parts: the <strong>BlockFund (BF)</strong> ERC-20 token, <strong>BlockFund Swap</strong> (our own exchange contract with a built-in daily faucet), and a website that explains the project, lets anyone acquire BF, and unlocks holder-only features: crypto news, live market graphs and a group chat. The aims are to build technical skills, understand how blockchains work end to end, and learn in the open.</p>
+        </section>
+
+        <section id="description">
+            <h2><span class="num">02</span>Project description</h2>
+            <p>BlockFund was created by two students as a portfolio project. The first version (2024) ran on the Ethereum Sepolia testnet and used a third-party Uniswap testnet deployment for trading. In 2026 the project was rebuilt:</p>
+            <ul>
+                <li><strong>New network.</strong> Ethereum Sepolia faucets started requiring a mainnet balance and the network reached its planned end-of-life, so newcomers could no longer get free test ETH. BlockFund moved to Base Sepolia, where several faucets still hand out test ETH for free.</li>
+                <li><strong>Our own exchange.</strong> Instead of relying on an external app, BlockFund now ships its own swap contract. Users pay with ETH, WETH or test USDC and receive BF at a fixed rate, can sell BF back, or claim a small free amount of BF once a day.</li>
+                <li><strong>Wallet sign-in.</strong> Holders log in by signing a message with their wallet, and holder status is read directly from the blockchain instead of a third-party explorer API.</li>
+                <li><strong>Redesigned website.</strong> A minimal, futuristic interface inspired by ethereum.org, with light and dark themes and full mobile support.</li>
+            </ul>
+            <p>BF has a fixed supply of 1,000,000 tokens and no monetary value. Holding any amount lets a user log in with their wallet and access the holder area of the site.</p>
+        </section>
+
+        <section id="architecture">
+            <h2><span class="num">03</span>Architecture</h2>
+            <table>
+                <thead><tr><th>Layer</th><th>Technology</th></tr></thead>
+                <tbody>
+                    <tr><td>Blockchain</td><td>Base Sepolia testnet (chain ID 84532), Solidity 0.8.24</td></tr>
+                    <tr><td>Contracts tooling</td><td>solc-js (compile), ganache (in-process test chain), ethers.js v6 (tests and deploy)</td></tr>
+                    <tr><td>Frontend</td><td>Plain HTML, CSS and JavaScript; ethers.js v6 on the swap page; Lightweight Charts and TradingView widgets on the graphs page</td></tr>
+                    <tr><td>Backend</td><td>Node.js and Express: serves the site, wallet sign-in and sessions, live chat (Server-Sent Events), news and feedback</td></tr>
+                    <tr><td>Database</td><td>PostgreSQL (chat messages and feedback)</td></tr>
+                    <tr><td>Data sources</td><td>Base Sepolia RPC (balances, swap), Blockscout (BF transfer history), CoinGecko (market data), public RSS feeds (news)</td></tr>
+                    <tr><td>Hosting</td><td>Render</td></tr>
+                </tbody>
+            </table>
+            <h3>Repository structure</h3>
+<pre>public/                 Website, served as static files
+  index.html            Home page
+  pages/                learn, use, swap, participate, news, graphs, chat
+  css/style.css         Styles, with light and dark theme tokens
+  js/config.js          Network settings and contract addresses (shared with the server)
+  js/layout.js          Shared header, login and profile dialogs, footer
+  js/site.js            Theme, menu, login and holder sessions (every page)
+  js/wallet.js          Wallet discovery, network and token helpers (every page)
+  js/*.js               One script per page
+  assets/               Logo and icons
+  docs/                 This documentation (HTML source and PDF)
+server/
+  server.js             Express app and routes
+  auth.js               Sign-in challenges and signature checks
+  chain.js              On-chain BF balance checks
+  chat.js               Live chat API (Server-Sent Events)
+  feedback.js           Feedback validation, storage and email
+  http.js               Async route helper and HTTP errors
+  news.js               Merges and caches the RSS news feeds
+  session.js            Signed session tokens
+  transfers.js          Cached BF transfer history from Blockscout
+  store.js              PostgreSQL storage, with JSON files as a local fallback
+contracts/
+  src/                  BlockFund.sol, BlockFundSwap.sol
+  scripts/              compile.js, deploy.js, test.js</pre>
+            <h3>How the pieces talk</h3>
+            <p>Every page loads <code>config.js</code> and <code>layout.js</code> first, so the header renders with the page, then <code>wallet.js</code> and <code>site.js</code> for shared behaviour. Reads from the chain (balances, rates, reserves, faucet timers) go straight to the public Base Sepolia RPC, so they work without a wallet. Anything that changes state (swaps, approvals, faucet claims) is signed in the user's own wallet. The server only reads BF balances to check holders; it never holds private keys or sends transactions.</p>
+        </section>
+
+        <section id="contracts">
+            <h2><span class="num">04</span>Smart contracts</h2>
+            <h3>BlockFund.sol: the BF token</h3>
+            <p>A minimal, standard ERC-20: name <code>BlockFund</code>, symbol <code>BF</code>, 18 decimals. The whole supply of 1,000,000 BF is minted once to the deployer in the constructor; there is no mint function, so the supply can never grow. It supports <code>transfer</code>, <code>approve</code> and <code>transferFrom</code>, including the common "infinite approval" convention.</p>
+
+            <h3>BlockFundSwap.sol: exchange and faucet</h3>
+            <p>A fixed-rate exchange desk that holds a reserve of BF. The owner lists payment tokens and sets a rate for each; <code>address(0)</code> stands for native ETH.</p>
+            <ul>
+                <li><strong>Buying:</strong> <code>buy(tokenIn, amountIn, minBfOut)</code>. The user pays ETH (sent with the call) or an approved ERC-20 and receives <code>amountIn * rate / 10^18</code> BF from the reserve.</li>
+                <li><strong>Selling:</strong> <code>sell(tokenOut, bfIn, minOut)</code>. The user returns approved BF and receives ETH or a listed token, paid from whatever the contract holds.</li>
+                <li><strong>Faucet:</strong> <code>claim()</code> sends a fixed amount of BF (25 BF by default) to the caller, at most once per cooldown (24 hours by default) per address.</li>
+                <li><strong>Views for the website:</strong> <code>supportedTokens()</code>, <code>quoteBuy</code>, <code>quoteSell</code>, <code>reserve</code>, <code>nextClaimAt</code>.</li>
+                <li><strong>Owner controls:</strong> <code>setRate</code> (a rate of 0 delists a token), <code>setFaucet</code>, <code>withdraw</code>, <code>transferOwnership</code>.</li>
+            </ul>
+            <div class="note"><p><strong>Why fixed rates?</strong> An automated market maker like Uniswap needs real liquidity on both sides and its price moves with every trade. A fixed rate keeps BF predictable and easy to explain, and lets a small reserve serve many users. Rates are expressed as BF per 10^18 base units of the payment token, so tokens with any number of decimals (USDC uses 6) price correctly.</p></div>
+
+            <h3>Safety measures</h3>
+            <ul>
+                <li>A reentrancy guard on every function that moves funds.</li>
+                <li>Slippage protection: every trade states a minimum output and reverts if it isn't met (the website uses 0.5%).</li>
+                <li>Reserve checks before paying out, with clear revert reasons (<code>BF reserve too low</code>, <code>reserve too low</code>).</li>
+                <li>Safe ERC-20 calls that accept tokens which return nothing as well as tokens which return <code>true</code>.</li>
+                <li>Only real contracts can be listed, BF cannot be priced in BF, and ETH amounts must match exactly.</li>
+            </ul>
+
+            <h3>Tests</h3>
+            <p><code>contracts/scripts/test.js</code> deploys both contracts on an in-process ganache chain and checks: buying with ETH, value and slippage guards, buying with an ERC-20, listing rules, selling BF for ETH, sells limited by the reserve, the faucet and its cooldown, and owner-only controls. Run it with <code>npm test</code> in <code>contracts/</code>.</p>
+        </section>
+
+        <section id="features">
+            <h2><span class="num">05</span>Features</h2>
+            <h3>1. Website</h3>
+            <p>Home, Learn, Use, Swap and Participate pages explain the project and guide new users. The design is minimal and futuristic, uses line-art illustrations that adapt to the theme, and works from large desktop screens down to phones. A sun/moon button switches between <strong>light and dark mode</strong>; the site follows the device setting by default and remembers the user's choice.</p>
+            <h3>2. BlockFund Swap</h3>
+            <p>A swap interface for <code>BlockFundSwap.sol</code>. It connects any installed wallet (with a selector when there are several), offers to add and switch to Base Sepolia, lists the payment tokens straight from the contract, shows live quotes, the minimum received and the available liquidity, handles ERC-20 approvals automatically, and links every transaction to the block explorer. A <strong>Sell BF</strong> tab reverses the direction.</p>
+            <h3>3. Daily BF faucet</h3>
+            <p>Next to the swap, users can claim free BF once a day, with a live countdown to their next claim. This lets anyone become a holder for only a tiny gas fee in test ETH.</p>
+            <h3>4. Holder login</h3>
+            <p>Holders log in with <strong>Connect wallet</strong>. The server issues a one-time sign-in message in the EIP-4361 (Sign-In with Ethereum) format, the wallet signs it for free, and the server checks that the signature belongs to that address. Each message expires after five minutes and works only once. The server then reads the address's BF balance on-chain and, if it holds BF, issues a signed session token valid for seven days. On desktop, every installed wallet that supports EIP-6963 (MetaMask, Rabby, Coinbase Wallet, Brave and others) is listed to choose from. On a phone without a wallet in the browser, the dialog offers to open the site inside MetaMask, Coinbase Wallet or Trust Wallet.</p>
+            <p>There are no passwords. An earlier version let users register any address with a password, which did not prove they owned it; wallet signatures do. Holder pages (news, graphs, chat) show a blurred preview with a login prompt to visitors, and the Holders menu shows a lock until they log in.</p>
+            <h3>5. Crypto news (holders)</h3>
+            <p>Headlines from <strong>CoinDesk, Cointelegraph, Decrypt and The Block</strong>, read from their public RSS feeds. No API key is needed. The server merges the feeds newest-first, caches them for five minutes, and the page refreshes every minute. Articles without an image show the BlockFund logo instead.</p>
+            <h3>6. Live graphs (holders)</h3>
+            <ul>
+                <li><strong>BlockFund activity:</strong> cumulative BF transfers per day, drawn with TradingView's Lightweight Charts. The server fetches the data from Blockscout and caches it for a minute.</li>
+                <li><strong>Top 10 by 24h volume:</strong> a live table from CoinGecko's free API.</li>
+                <li><strong>Price charts:</strong> an embedded TradingView widget for the largest coins.</li>
+            </ul>
+            <h3>7. Group chat (holders)</h3>
+            <p>A real-time chat for holders and coordinators. New messages are pushed to everyone instantly with Server-Sent Events and stored in PostgreSQL, so they survive restarts and redeploys. The sender is taken from the session, so nobody can post as another address. The last 100 messages are shown, and coordinators can clear the chat or restore the last cleared messages.</p>
+            <h3>8. Feedback form</h3>
+            <p>The Participate page has a built-in feedback form (topic, optional name and email, message). The server saves each submission to the database and emails it to the team through Resend's HTTPS API, setting Reply-To to the sender's address. (Render's free plan blocks SMTP, so a plain Gmail setup would not deliver.) A hidden honeypot field and a limit of five messages per hour per visitor keep spam out.</p>
+        </section>
+
+        <section id="guide">
+            <h2><span class="num">06</span>User guide</h2>
+            <p>The <strong>Use</strong> page on the website turns most of these steps into a single click.</p>
+            <ol class="steps">
+                <li><strong>Install a wallet.</strong> Any EVM browser wallet works, such as MetaMask, Rabby or Coinbase Wallet. Store your recovery phrase safely and never share it; BlockFund will never ask for it.</li>
+                <li><strong>Add Base Sepolia.</strong> Press <em>Add network</em> on the Use page, or add it manually with the values in the Reference section.</li>
+                <li><strong>Get free test ETH.</strong> Paste your address into a Base Sepolia faucet such as Alchemy, QuickNode or Coinbase CDP (links on the Use page). Circle's faucet also gives test USDC, which the swap accepts.</li>
+                <li><strong>Get BF.</strong> Open <strong>Swap</strong>, connect your wallet, enter an amount of ETH, WETH or USDC and confirm. For ERC-20 tokens your wallet first asks for an approval. Alternatively, press <em>Claim</em> to receive the free daily BF.</li>
+                <li><strong>Show BF in your wallet.</strong> Press <em>Add BF to wallet</em>, or import the token manually with the BF address from the Use page.</li>
+                <li><strong>Log in.</strong> Press <em>Log in</em> in the top bar, then <em>Connect wallet</em>, and approve the signature request. If the address holds BF, the lock on the <strong>Holders</strong> menu disappears and News, Graphs and Chat unlock.</li>
+            </ol>
+            <div class="note"><p>Selling works the same way in reverse: switch to <strong>Sell BF</strong>, pick what you want to receive, approve BF once, and confirm.</p></div>
+        </section>
+
+        <section id="developers">
+            <h2><span class="num">07</span>Running and deploying</h2>
+            <h3>Run the website locally</h3>
+<pre>npm run build      # installs the server's dependencies
+npm start          # http://localhost:8080</pre>
+            <p>Without a database, chat and feedback are kept in <code>server/data/</code>, which is fine for local development. On Render, the build command is <code>npm run build</code> and the start command is <code>npm start</code>, with these environment variables:</p>
+            <table>
+                <thead><tr><th>Variable</th><th>Purpose</th></tr></thead>
+                <tbody>
+                    <tr><td><code>DATABASE_URL</code></td><td>PostgreSQL connection string (for example a free Neon database). Required on Render, whose disk is wiped on every deploy.</td></tr>
+                    <tr><td><code>SESSION_SECRET</code></td><td>Long random string that signs sessions, so holders stay logged in across restarts.</td></tr>
+                    <tr><td><code>RESEND_API_KEY</code></td><td>Sends feedback emails through Resend.</td></tr>
+                    <tr><td><code>FEEDBACK_TO</code></td><td>Optional. Feedback recipient, defaults to g.dedebilis@gmail.com.</td></tr>
+                </tbody>
+            </table>
+            <h3>Test and deploy the contracts</h3>
+<pre>cd contracts
+npm install
+npm test            # compile and run the test suite
+read -s -p "Private key: " PRIVATE_KEY && export PRIVATE_KEY && npm run deploy</pre>
+            <p>Use a testnet-only key that holds a little Base Sepolia ETH. The deploy script deploys BF, deploys the swap with the default ETH rate and faucet settings, lists WETH and USDC, moves 900,000 BF into the swap's reserve (the deployer keeps 100,000), and prints two addresses. Paste them into <code>public/js/config.js</code> as <code>bfToken</code> and <code>swap</code>. Until then the swap page runs in preview mode and shows quotes only.</p>
+        </section>
+
+        <section id="reference">
+            <h2><span class="num">08</span>Reference</h2>
+            <h3>Network</h3>
+            <table>
+                <tbody>
+                    <tr><td>Network name</td><td>Base Sepolia</td></tr>
+                    <tr><td>Chain ID</td><td>84532 (<code>0x14a34</code>)</td></tr>
+                    <tr><td>RPC URL</td><td><code>https://sepolia.base.org</code></td></tr>
+                    <tr><td>Currency</td><td>ETH (test)</td></tr>
+                    <tr><td>Block explorer</td><td><code>https://sepolia.basescan.org</code></td></tr>
+                </tbody>
+            </table>
+            <h3>Token and default swap settings</h3>
+            <table>
+                <thead><tr><th>Item</th><th>Value</th></tr></thead>
+                <tbody>
+                    <tr><td>Token</td><td>BlockFund (BF), 18 decimals, 1,000,000 fixed supply</td></tr>
+                    <tr><td>Token contract</td><td><code>0x89c0452ce2Bd699587Bf3437D9736f4c54966a5D</code></td></tr>
+                    <tr><td>Swap contract</td><td><code>0x92D05af6dCaEEEC25c44eb60332DF96857645774</code></td></tr>
+                    <tr><td>ETH</td><td>1 ETH = 10,000 BF</td></tr>
+                    <tr><td>WETH</td><td>1 WETH = 10,000 BF (<code>0x4200...0006</code>)</td></tr>
+                    <tr><td>USDC</td><td>1 USDC = 5 BF (<code>0x036C...CF7e</code>, Circle test USDC)</td></tr>
+                    <tr><td>Faucet</td><td>25 BF per address every 24 hours</td></tr>
+                    <tr><td>Slippage</td><td>0.5% minimum-output tolerance in the website</td></tr>
+                </tbody>
+            </table>
+            <h3>Server API</h3>
+            <table>
+                <thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead>
+                <tbody>
+                    <tr><td><code>POST /api/auth/challenge</code></td><td>One-time sign-in message for an address</td></tr>
+                    <tr><td><code>POST /api/auth/verify</code></td><td>Check the signed message and BF balance, return a session</td></tr>
+                    <tr><td><code>GET /api/session</code></td><td>Re-check a saved session and the BF balance</td></tr>
+                    <tr><td><code>GET /api/news</code></td><td>Merged RSS news, cached for five minutes</td></tr>
+                    <tr><td><code>GET /api/transfers</code></td><td>BF transfer count and daily history, cached for a minute</td></tr>
+                    <tr><td><code>POST /api/feedback</code></td><td>Send feedback (saved and emailed)</td></tr>
+                    <tr><td><code>GET /api/chat</code></td><td>Chat messages (session required)</td></tr>
+                    <tr><td><code>GET /api/chat/stream</code></td><td>Live chat updates via Server-Sent Events (session required)</td></tr>
+                    <tr><td><code>POST /api/chat</code></td><td>Send a message (session required)</td></tr>
+                    <tr><td><code>DELETE /api/chat</code></td><td>Clear the chat (coordinators)</td></tr>
+                    <tr><td><code>POST /api/chat/restore</code></td><td>Restore the last cleared messages (coordinators)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="challenges">
+            <h2><span class="num">09</span>Challenges and solutions</h2>
+            <p>When we started, our experience in front-end design, blockchain integration and backend development was limited. Building visually polished interfaces, reading blockchain data from code, and implementing features like the live chat and the login system all stretched our skills. We closed the gaps through reading, tutorials, and frequent discussions where we brainstormed solutions together.</p>
+            <p>The 2026 rebuild brought new challenges:</p>
+            <ul>
+                <li><strong>A disappearing testnet.</strong> Sepolia faucets started requiring mainnet ETH, which locked out new users. We compared the remaining testnets and faucet requirements and moved to Base Sepolia.</li>
+                <li><strong>Dependence on outside services.</strong> The external swap, the old Etherscan API and the news API all changed or shut down. We replaced them with our own contracts, direct RPC reads, and keyless sources (Blockscout, CoinGecko, RSS).</li>
+                <li><strong>Writing contracts safely.</strong> Moving real value around, even on a testnet, demanded care. We added reentrancy protection, slippage limits and reserve checks, backed by an automated test suite.</li>
+                <li><strong>Maintainability.</strong> Every page repeated hundreds of lines of header and footer code. We introduced a shared layout, a single design system, and a clear <code>public/</code>, <code>server/</code>, <code>contracts/</code> structure.</li>
+            </ul>
+        </section>
+
+        <section id="resources">
+            <h2><span class="num">10</span>Resources and references</h2>
+            <ul>
+                <li><strong>Design inspiration:</strong> ethereum.org.</li>
+                <li><strong>Network:</strong> Base Sepolia by Base (Coinbase); public RPC at sepolia.base.org.</li>
+                <li><strong>Blockchain data:</strong> Blockscout (BF transfer history) and BaseScan (explorer links).</li>
+                <li><strong>Contracts tooling:</strong> Solidity, solc-js, ganache, ethers.js.</li>
+                <li><strong>Wallets:</strong> EIP-4361 (Sign-In with Ethereum) messages and EIP-6963 wallet discovery.</li>
+                <li><strong>Email:</strong> Resend.</li>
+                <li><strong>Database:</strong> PostgreSQL.</li>
+                <li><strong>Market data:</strong> CoinGecko API.</li>
+                <li><strong>Charts:</strong> TradingView Lightweight Charts and TradingView widgets.</li>
+                <li><strong>News:</strong> RSS feeds from CoinDesk, Cointelegraph, Decrypt and The Block.</li>
+                <li><strong>Faucets:</strong> Alchemy, QuickNode, Coinbase Developer Platform, Circle.</li>
+                <li><strong>Fonts:</strong> Inter and JetBrains Mono (Google Fonts).</li>
+            </ul>
+            <div class="doc-footer"><span>BlockFund documentation, version 2</span><span>October 2026</span></div>
+        </section>
+    </main>
+</body>
+</html>
