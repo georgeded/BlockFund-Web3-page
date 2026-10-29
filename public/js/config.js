@@ -7,8 +7,8 @@ const BLOCKFUND = {
     explorer: 'https://sepolia.basescan.org',
     blockscout: 'https://base-sepolia.blockscout.com',
 
-    bfToken: '',
-    swap: '',
+    bfToken: '0x89c0452ce2Bd699587Bf3437D9736f4c54966a5D',
+    swap: '0x92D05af6dCaEEEC25c44eb60332DF96857645774',
 
     decimals: 18,
 
