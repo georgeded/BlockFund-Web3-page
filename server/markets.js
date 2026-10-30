@@ -1,14 +1,14 @@
-// Top coins by 24h volume from CoinGecko, each with a TradingView symbol that exists.
+// TradingView symbols for coin tickers, checked against TradingView's symbol search.
+// The coin list itself comes from CoinGecko in the browser, since CoinGecko blocks many cloud servers.
 
-const MARKETS_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=volume_desc&per_page=10&page=1';
 const SEARCH_URL = 'https://symbol-search.tradingview.com/symbol_search/v3/';
-const MARKETS_MS = 60 * 1000;
 const SYMBOL_MS = 24 * 60 * 60 * 1000;
+const MAX_SYMBOLS = 20;
+const TICKER = /^[A-Z0-9]{1,15}$/;
 
 // TradingView's aggregated USD price first, then the largest exchange pairs.
 const candidates = s => [['CRYPTO', `${s}USD`], ['BINANCE', `${s}USDT`], ['COINBASE', `${s}USD`]];
 
-let markets = { at: 0, coins: [] };
 const symbols = new Map();
 
 async function symbolExists(exchange, text) {
@@ -23,8 +23,7 @@ async function symbolExists(exchange, text) {
     return found.some(f => plain(f.symbol) === text && plain(f.exchange) === exchange);
 }
 
-async function tradingViewSymbol(symbol) {
-    const s = symbol.toUpperCase();
+async function tradingViewSymbol(s) {
     const hit = symbols.get(s);
     if (hit && Date.now() - hit.at < SYMBOL_MS) return hit.value;
     let value = null;
@@ -38,31 +37,14 @@ async function tradingViewSymbol(symbol) {
     return value;
 }
 
-async function getMarkets() {
-    if (Date.now() - markets.at < MARKETS_MS) return markets.coins;
-    try {
-        const res = await fetch(MARKETS_URL, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
-        const data = await res.json();
-        if (!res.ok || !Array.isArray(data)) throw new Error(`CoinGecko returned ${res.status}`);
-        const coins = await Promise.all(data.map(async c => ({
-            name: c.name,
-            symbol: c.symbol.toUpperCase(),
-            image: c.image,
-            price: c.current_price,
-            volume: c.total_volume,
-            tvSymbol: await tradingViewSymbol(c.symbol).catch(error => {
-                console.error(`TradingView lookup for ${c.symbol} failed:`, error.message);
-                return null;
-            }),
-        })));
-        markets = { at: Date.now(), coins };
-    } catch (error) {
-        // CoinGecko rate limits free use, so a recent list is better than none.
-        if (!markets.coins.length) throw error;
-        console.error('Market data refresh failed, serving the last list:', error.message);
-        markets.at = Date.now();
-    }
-    return markets.coins;
+// Maps each ticker to a TradingView symbol, or null when none was found or the search failed.
+async function chartSymbols(tickers) {
+    const list = [...new Set(tickers.map(t => String(t).toUpperCase()))].filter(t => TICKER.test(t)).slice(0, MAX_SYMBOLS);
+    const pairs = await Promise.all(list.map(async s => [s, await tradingViewSymbol(s).catch(error => {
+        console.error(`TradingView lookup for ${s} failed:`, error.message);
+        return null;
+    })]));
+    return Object.fromEntries(pairs);
 }
 
-module.exports = { getMarkets };
+module.exports = { chartSymbols };

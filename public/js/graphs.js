@@ -56,9 +56,8 @@ async function fetchCryptoData() {
     const tbody = document.querySelector('#crypto-table tbody');
     const usd = (n, max) => '$' + Number(n).toLocaleString('en-US', { maximumFractionDigits: max, minimumFractionDigits: Math.min(2, max) });
     try {
-        const data = await (await fetch('/api/markets')).json();
-        if (!data.success) throw new Error(data.error);
-        const coins = data.coins;
+        const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=volume_desc&per_page=10&page=1');
+        const coins = (await res.json()).map(c => ({ name: c.name, symbol: c.symbol.toUpperCase(), image: c.image, price: c.current_price, volume: c.total_volume }));
         tbody.replaceChildren(...coins.map((c, i) => {
             const row = document.createElement('tr');
             row.innerHTML = `<td class="muted">${i + 1}</td><td><div class="coin"><img alt=""><span></span></div></td>
@@ -69,11 +68,14 @@ async function fetchCryptoData() {
             row.querySelector('.coin span').innerHTML = `${c.name.replace(/</g, '&lt;')}<small>${c.symbol.replace(/</g, '&lt;')}</small>`;
             return row;
         }));
-        const listed = coins.filter(c => c.tvSymbol).map(c => [c.name, c.tvSymbol]);
-        if (listed.length) chartCoins = listed;
+        // Unchecked symbols fall back to TradingView's aggregated USD price.
+        const checked = await fetch('/api/chart-symbols?tickers=' + coins.map(c => c.symbol).join(','))
+            .then(r => r.json()).then(d => d.symbols || {}).catch(() => ({}));
+        chartCoins = coins.map(c => [c.name, checked[c.symbol] || `CRYPTO:${c.symbol}USD`]);
     } catch (error) {
         console.error('Error fetching cryptocurrency data:', error);
-        tbody.innerHTML = '<tr><td colspan="4" class="muted">Market data is unavailable right now.</td></tr>';
+        // Keep the last good table when a refresh fails.
+        if (!tbody.querySelector('.coin')) tbody.innerHTML = '<tr><td colspan="4" class="muted">Market data is unavailable right now.</td></tr>';
     }
     drawPriceCharts();
 }

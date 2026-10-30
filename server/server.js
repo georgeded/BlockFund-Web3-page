@@ -3,7 +3,7 @@ const path = require('path');
 const store = require('./store');
 const { getNews } = require('./news');
 const { getTransfers } = require('./transfers');
-const { getMarkets } = require('./markets');
+const { chartSymbols } = require('./markets');
 const { createChallenge, verifyChallenge } = require('./auth');
 const { submitFeedback } = require('./feedback');
 const { bfBalanceOf } = require('./chain');
@@ -75,13 +75,8 @@ app.get('/api/transfers', handle(async (req, res) => {
     }
 }));
 
-app.get('/api/markets', handle(async (req, res) => {
-    try {
-        res.json({ success: true, coins: await getMarkets() });
-    } catch (error) {
-        console.error('Market data failed:', error.message);
-        throw new HttpError(502, 'Market data is unavailable right now');
-    }
+app.get('/api/chart-symbols', handle(async (req, res) => {
+    res.json({ success: true, symbols: await chartSymbols(String(req.query.tickers || '').split(',')) });
 }));
 
 app.post('/api/feedback', handle(async (req, res) => {
