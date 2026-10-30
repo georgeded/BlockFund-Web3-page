@@ -56,12 +56,12 @@ const NAV = [
         { label: 'Test ETH faucets', desc: 'Free Base Sepolia ETH', href: '/pages/use.html#faucets' },
         { label: 'BlockFund Swap', desc: 'Trade ETH, WETH, USDC for BF', href: '/pages/swap.html' },
     ]},
-    { label: 'Swap', href: '/pages/swap.html' },
     { label: 'Participate', href: '/pages/participate.html', items: [
         { label: 'Join the community', desc: 'Become a holder', href: '/pages/participate.html#join' },
         { label: 'Documentation', desc: 'The full project write-up', href: '/pages/participate.html#docs' },
         { label: 'Feedback', desc: 'Tell us what to improve', href: '/pages/participate.html#feedback' },
     ]},
+    { label: 'Swap', href: '/pages/swap.html' },
     { label: 'Holders', href: '/pages/news.html', holders: true, items: [
         { label: 'News', desc: 'Latest crypto headlines', href: '/pages/news.html' },
         { label: 'Graphs', desc: 'Live market + BF activity', href: '/pages/graphs.html' },
