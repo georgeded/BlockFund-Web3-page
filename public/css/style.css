@@ -506,7 +506,9 @@ th.num { text-align: right; }
 td .coin { display: flex; align-items: center; gap: 12px; }
 td .coin img { width: 28px; height: 28px; border-radius: 50%; }
 td .coin small { color: var(--text-3); margin-left: 4px; }
-.tv-widget { height: 520px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); }
+.tv-widget { position: relative; height: 520px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+/* The widget draws its own square border; push it just outside the rounded card so only one border shows. */
+.tv-widget iframe { position: absolute; top: -2px; left: -2px; width: calc(100% + 4px) !important; height: calc(100% + 4px) !important; }
 
 .chat-window { display: flex; flex-direction: column; height: min(70vh, 680px); padding: 0; overflow: hidden; }
 .chat-messages { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 12px; }

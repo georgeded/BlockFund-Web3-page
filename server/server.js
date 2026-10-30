@@ -3,6 +3,7 @@ const path = require('path');
 const store = require('./store');
 const { getNews } = require('./news');
 const { getTransfers } = require('./transfers');
+const { getMarkets } = require('./markets');
 const { createChallenge, verifyChallenge } = require('./auth');
 const { submitFeedback } = require('./feedback');
 const { bfBalanceOf } = require('./chain');
@@ -71,6 +72,15 @@ app.get('/api/transfers', handle(async (req, res) => {
     } catch (error) {
         console.error('Transfer history failed:', error.message);
         throw new HttpError(502, 'Transfer history is unavailable right now');
+    }
+}));
+
+app.get('/api/markets', handle(async (req, res) => {
+    try {
+        res.json({ success: true, coins: await getMarkets() });
+    } catch (error) {
+        console.error('Market data failed:', error.message);
+        throw new HttpError(502, 'Market data is unavailable right now');
     }
 }));
 
