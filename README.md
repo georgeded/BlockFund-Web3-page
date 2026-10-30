@@ -1,5 +1,15 @@
 # BlockFund
 
+[![Live site](https://img.shields.io/badge/live-blockfund.onrender.com-6b4dff?logo=render&logoColor=white)](https://blockfund.onrender.com)
+[![Network](https://img.shields.io/badge/network-Base%20Sepolia-0052FF?logo=coinbase&logoColor=white)](https://sepolia.basescan.org/token/0x89c0452ce2Bd699587Bf3437D9736f4c54966a5D)
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?logo=solidity&logoColor=white)](contracts/src)
+[![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A520-5FA04E?logo=nodedotjs&logoColor=white)](server)
+[![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)](server/server.js)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-4169E1?logo=postgresql&logoColor=white)](server/store.js)
+[![ethers.js](https://img.shields.io/badge/ethers.js-v6-2535A0?logo=ethereum&logoColor=white)](https://docs.ethers.org/v6/)
+[![Wallet login](https://img.shields.io/badge/wallet%20login-EIP--4361-627EEA?logo=ethereum&logoColor=white)](https://eips.ethereum.org/EIPS/eip-4361)
+[![Testnet only](https://img.shields.io/badge/testnet%20only-no%20real%20value-lightgrey)](#disclaimer)
+
 BlockFund is a student project exploring Ethereum development end to end. It consists of an ERC-20 token (BF), a fixed-rate exchange contract with a daily faucet, and a website where users can get BF and, as holders, access news, market graphs and a group chat.
 
 The project runs on the Base Sepolia testnet. BF has no monetary value.
