@@ -269,6 +269,11 @@ dialog.modal h2 { font-size: 1.7rem; }
 .wallet-option img, .wallet-option svg, .wallet-options .btn img { width: 26px; height: 26px; border-radius: 6px; flex: none; }
 .profile-head { display: flex; align-items: center; gap: 16px; margin: 4px 0 20px; }
 .profile-head h2 { margin: 0; font-family: var(--mono); font-size: 1.4rem; }
+#profileModal { width: min(500px, calc(100vw - 32px)); }
+.profile-note { margin: 8px 0 0; padding: 10px 14px; border-radius: var(--radius); background: var(--accent-soft); color: var(--text); font-size: 0.9rem; font-weight: 550; }
+.address-row { display: flex; align-items: center; gap: 8px; margin: 0 0 24px; }
+.address-row .mono { flex: 1; min-width: 0; font-size: 0.86rem; white-space: nowrap; }
+.address-row .icon-btn { flex: none; }
 
 /* Cards */
 .card {
@@ -621,6 +626,7 @@ textarea { height: auto; padding: 12px 14px; resize: vertical; min-height: 140px
     .brand span:last-child { display: none; }
     .card { padding: 22px; }
     dialog.modal { padding: 24px; }
+    .address-row .mono { white-space: normal; word-break: break-all; }
     .swap-field input { font-size: 1.6rem; }
     .section { padding: 56px 0; }
     .section-head { margin-bottom: 32px; }

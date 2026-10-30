@@ -1,16 +1,6 @@
 // Theme, menu, dialogs and login session. Runs on every page after layout.js.
 
-const PROFILE_DECIMALS = 3;
-
 const $ = id => document.getElementById(id);
-const shortAddress = a => `${a.slice(0, 6)}...${a.slice(-4)}`;
-const formatBF = n => n.toLocaleString('en-US', { maximumFractionDigits: PROFILE_DECIMALS }) + ' BF';
-
-// Gradient avatar derived from the address.
-function avatarStyle(address) {
-    const h = parseInt(address.slice(2, 8), 16) % 360;
-    return `linear-gradient(135deg, hsl(${h} 80% 62%), hsl(${(h + 70) % 360} 75% 48%))`;
-}
 
 function setTheme(theme) {
     document.documentElement.dataset.theme = theme;
@@ -44,6 +34,8 @@ function setSession(session) {
     $('profileChip').hidden = !session;
     if (session) {
         localStorage.setItem('session', session.token);
+        const { address, balance, coordinator } = session;
+        localStorage.setItem('sessionInfo', JSON.stringify({ address, balance, coordinator }));
         $('currentBalance').textContent = formatBF(session.balance);
         $('publicAddress').textContent = shortAddress(session.address);
         $('profileBalance').textContent = formatBF(session.balance);
@@ -52,15 +44,36 @@ function setSession(session) {
         $('chipAvatar').style.background = $('profileAvatar').style.background = avatarStyle(session.address);
     } else {
         localStorage.removeItem('session');
+        localStorage.removeItem('sessionInfo');
     }
     document.dispatchEvent(new CustomEvent('sessionchange', { detail: session }));
 }
 
-$('loginButton').addEventListener('click', () => {
+function openProfile(note) {
+    $('profileNote').hidden = !note;
+    $('profileModal').showModal();
+}
+
+// Every login button lands here; a holder who is already logged in sees their profile instead.
+function openLogin() {
+    if (window.holderSession) return openProfile(true);
     renderWalletOptions();
     $('loginModal').showModal();
+}
+
+$('loginButton').addEventListener('click', openLogin);
+$('profileChip').addEventListener('click', () => openProfile(false));
+$('copyAddress').addEventListener('click', () => {
+    const button = $('copyAddress');
+    navigator.clipboard.writeText(window.holderSession.address).then(() => {
+        button.innerHTML = ICONS.check;
+        button.setAttribute('aria-label', 'Address copied');
+        setTimeout(() => {
+            button.innerHTML = ICONS.copy;
+            button.setAttribute('aria-label', 'Copy address');
+        }, 1500);
+    });
 });
-$('profileChip').addEventListener('click', () => $('profileModal').showModal());
 $('logout').addEventListener('click', () => {
     $('profileModal').close();
     setSession(null);
@@ -83,6 +96,7 @@ async function api(url, { method = 'GET', body, token } = {}) {
 // Re-check a saved session with the server, which also re-checks the BF balance.
 const savedToken = localStorage.getItem('session');
 if (savedToken) {
+    if (cachedSession) setSession({ ...cachedSession, token: savedToken });
     api('/api/session', { token: savedToken })
         .then(session => setSession({ ...session, token: savedToken }))
         .catch(err => {
@@ -199,10 +213,10 @@ document.querySelectorAll('.holders-gate').forEach(gate => {
         </div>`);
 });
 // Links to /?login (old registration URLs) open the login dialog.
-if (new URLSearchParams(location.search).has('login')) $('loginModal').showModal();
+if (new URLSearchParams(location.search).has('login')) openLogin();
 
 document.addEventListener('click', e => {
-    if (e.target.closest('[data-open-login]')) $('loginModal').showModal();
+    if (e.target.closest('[data-open-login]')) openLogin();
     // Only one team-member menu open at a time; clicking elsewhere closes it.
     const open = e.target.closest('details.person');
     document.querySelectorAll('details.person[open]').forEach(d => { if (d !== open) d.open = false; });

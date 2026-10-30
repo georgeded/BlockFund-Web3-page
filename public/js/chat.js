@@ -5,6 +5,7 @@ const sendButton = document.getElementById('send');
 const controls = document.getElementById('coordinator-controls');
 
 let stream = null;
+let streamToken = null;
 let messages = [];
 
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c =>
@@ -44,6 +45,8 @@ async function loadMessages(token) {
 
 function connect(session) {
     disconnect();
+    streamToken = session.token;
+    if (!messages.length) chatWindow.innerHTML = '<div class="empty-state">Loading messages...</div>';
     loadMessages(session.token).catch(err => console.error('Could not load chat:', err));
     stream = new EventSource(`/api/chat/stream?token=${encodeURIComponent(session.token)}`);
     stream.addEventListener('message', e => {
@@ -60,14 +63,17 @@ function connect(session) {
 function disconnect() {
     stream?.close();
     stream = null;
+    streamToken = null;
 }
 
 function onSession(session) {
     if (session) {
         chatInput.disabled = false;
-        connect(session);
+        // The server confirming the same session again needs no reconnect.
+        if (session.token !== streamToken) connect(session);
     } else {
         disconnect();
+        messages = [];
         controls.hidden = true;
         chatInput.disabled = true;
         render(PREVIEW, { scroll: true });
@@ -117,5 +123,9 @@ document.getElementById('reset-messages').addEventListener('click', () =>
     coordinatorAction('POST', '/api/chat/restore', 'Restore the messages that were last deleted?'));
 
 document.addEventListener('sessionchange', e => onSession(e.detail));
-// Until site.js confirms a saved session, show the preview.
-onSession(window.holderSession);
+// Visitors without a saved session see a preview; a saved one is being checked, so wait for it.
+if (window.holderSession || !localStorage.getItem('session')) onSession(window.holderSession);
+else {
+    chatInput.disabled = sendButton.disabled = true;
+    chatWindow.innerHTML = '<div class="empty-state">Loading messages...</div>';
+}
